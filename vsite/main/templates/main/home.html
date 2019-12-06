@@ -1,0 +1,17 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+<div class="row">
+    {% for tex in text %}
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{tex.text_title}}</span>
+              <p>{{tex.text_published}}</p>
+              <p>{{tex.text_content|safe}}</p>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+  </div>
+{% endblock %}
