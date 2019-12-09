@@ -1,0 +1,14 @@
+*****References on material*****
+
+CSS sampled
+https://materializecss.com/
+
+Form and Field validation
+https://docs.djangoproject.com/en/3.0/ref/forms/validation/
+
+Working with Forms
+https://docs.djangoproject.com/en/3.0/topics/forms/
+
+Global variables/keywords
+https://www.geeksforgeeks.org/global-keyword-in-python/
+
