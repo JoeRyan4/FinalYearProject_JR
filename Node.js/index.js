@@ -34,3 +34,32 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
     console.log(`Server is up on port ${port}!`)
 })
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+1.Send a welcome message to new users ie.(send welcome as an event data
+2.Have the client listen for a message event and print the message to complete.
+3. Test code
+
+
+
+
+
+
+
+
+
+
+
+
+
