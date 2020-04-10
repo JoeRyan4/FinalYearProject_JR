@@ -103,29 +103,36 @@ Need to have two new functions for the user
 2.Display an array of users - else display none
 3.test code
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-addUser({
-    id: 23,
-    username: 'Joe',
-    room: 'Lounge'
-})
+// addUser({
+//     id: 23,
+//     username: 'Joe',
+//     room: 'Lounge'
+// })
 
-addUser({
-    id: 33,
-    username: 'Dave',
-    room: 'Lounge'
-})
+// addUser({
+//     id: 33,
+//     username: 'Dave',
+//     room: 'Lounge'
+// })
 
-addUser({
-    id: 44,
-    username: 'Chris',
-    room: 'Room'
-})
+// addUser({
+//     id: 44,
+//     username: 'Chris',
+//     room: 'Room'
+// })
 
-const user = getUser(333)
-console.log(user)
+// const user = getUser(333)
+// console.log(user)
 
-const userList = getUsersInRoom('Lake')
-console.log(userList)
+// const userList = getUsersInRoom('Lake')
+// console.log(userList)
+
+module.exports = { 
+    addUser, 
+    removeUser,
+    getUser,
+    getUsersInRoom 
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
