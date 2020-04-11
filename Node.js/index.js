@@ -601,7 +601,10 @@ server.listen(port, () => {
 // message needs to emit into the current room (Must also work for send location)
 
 
-
+// 1.set up server to send username to th client
+// 2.edit the calls the include the username
+// 3.check client to render username
+// 4.test
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
