@@ -1,0 +1,56 @@
+<section  id="check_list">
+		<div class="row" style="text-align: center;">
+			<div class="col-md-12">
+			 <h2>Tracking Details</h2>
+			</div>
+			<div class="col-md-8 offset-md-2">
+			<div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+							 <th>City Name</th>
+                                <th>Warehouse</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+							{% for i in list %}
+                            <tr>
+                               {% if i.warehouse_name.city  %}	
+								<td>{{i.warehouse_name.city }}</td>
+							{% else %}
+								<td> - </td>
+							{% endif %}
+							{% if i.warehouse_name.name %}
+                                <td>{{i.warehouse_name.name}}</td>
+							{% else %}
+								<td>-</td>
+							{% endif %}
+							{% if i.date %}
+                                <td>{{i.date}}</td>
+							{% else %}
+								<td>-</td>
+							{% endif %}
+                           {% if i.time %}
+                                <td>{{i.time}}</td>
+							{% else %}
+								<td>-</td>
+							{% endif %}
+
+							{% if i.type %}
+                                <td>{{i.type}}</td>
+							{% else %}
+								<td>-</td>
+							{% endif %}
+                           
+                            </tr>
+							{% endfor %}
+                          </tbody>
+						  
+                    </table>
+                </div>
+			</div>
+		</div>
+	</section>
