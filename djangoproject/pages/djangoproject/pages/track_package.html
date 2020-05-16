@@ -1,0 +1,415 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Courier Tracking </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'vendor_login/bootstrap/css/bootstrap.min.css' %}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'fonts_login/font-awesome-4.7.0/css/font-awesome.min.css' %}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}"> -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<style>
+.bg{
+    height: 110px;
+    z-index: 466;
+    <!-- background: transparent url({% static 'images/registerbg.jpg' %}) no-repeat center center; -->
+    background-size: cover;
+}
+body{
+		overflow-x:hidden;
+}
+hgroup { 
+	text-align:center;
+	margin-top: 4em;
+}
+h1, h3 { font-weight: 300; }
+h1 { color: #636363; }
+h3 { color: #fd7506    ; }
+form {
+	padding: 0em 2em 2em 2em;
+	border:none;
+	margin-top:20px;
+}
+.group { 
+	position: relative; 
+	margin-bottom: 25px; 
+}
+
+input {
+	font-size: 18px;
+	padding: 10px 10px 10px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background: #fafafa;
+	color: #636363;
+	width: 100%;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #757575;
+}
+input:focus { outline: none; }
+label {
+	color: #999; 
+	font-size: 18px;
+	font-weight: normal;
+	position: absolute;
+	pointer-events: none;
+	left: 5px;
+	top: 10px;
+	transition: all 0.2s ease;
+}
+
+input:focus ~ label, input.used ~ label {
+	top: -20px;
+  transform: scale(.75); left: -2px;
+	color: #020202   ;
+}
+.bar {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+
+.bar:before, .bar:after {
+	content: '';
+	height: 2px; 
+	width: 0;
+	bottom: 1px; 
+	position: absolute;
+	background: #020202   ; 
+	transition: all 0.2s ease;
+}
+
+.bar:before { left: 50%; }
+.bar:after { right: 50%; }
+
+input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
+.highlight {
+	position: absolute;
+	height: 60%; 
+	width: 100px; 
+	top: 25%; 
+	left: 0;
+	pointer-events: none;
+	opacity: 0.5;
+}
+input:focus ~ .highlight {
+	animation: inputHighlighter 0.3s ease;
+}
+
+@keyframes inputHighlighter {
+	from { background: #fd7506    ; }
+	to 	{ width: 0; background: transparent; }
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  margin: .3em 0 1em 0;
+  width: 100%;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 16px;
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid #3160B6;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.button:focus { outline: 0; }
+.buttonBlue {
+  background: #fd7506    ;
+  text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+}
+.buttonBlue:hover { background: #357bd8; }
+
+.ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+.ripplesCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+.ripples.is-active .ripplesCircle {
+  animation: ripples .4s ease-in;
+}
+
+@keyframes ripples {
+  0% { opacity: 0; }
+
+  25% { opacity: 1; }
+
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    opacity: 0;
+  }
+}
+.form-bg{
+    text-align: center;
+    margin-top: 85px;
+    border: 1px solid #f18704;;
+	margin-bottom: 85px;
+    box-shadow: 0px 0px 4px 0px;
+    border-radius: 30px;
+	
+}
+.login100-form-title {
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    text-align: center;
+    display: block;
+    width: 100%;
+    top: 0;
+    left: 0;
+   background-image: linear-gradient(to bottom right, #fca91b , #fd7506 );
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.login100-form-btn {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+	height: 50px;
+    background-image: linear-gradient(to bottom right, #fca318,#fd7b08 );
+    border-radius: 10px;
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+	float: right;
+}
+</style>
+<body>
+    <section class="bg">
+    <div class="container top">
+        <div class="row">
+         </div>
+    </div>
+            <header class="header-fixed">
+
+                    <div class="header-limiter">
+                
+                        <h1 style="font-family: Courier;"><a href="#">Courier Tracking </a></h1>
+                         <nav>
+                            <a href="/"><b>HOME</b></a>
+                            <a href="/"><b>LOGIN</b></a>
+                            <a href="#"><b> Track Your Package</b></a>
+
+                        </nav>
+                    </div>
+                </header> 
+    </section>
+    <section style="margin-top: 50px;">
+		<div class="row" style="text-align: center;">
+			<div class="col-md-12">
+			 <h2>Track Courier Status</h2>
+			</div>
+			<div class="col-md-4"></div>
+			<div class="col-md-6">
+			<form class="form-horizontal">
+					<div class="row form-group">
+						<div class="col-md-6">
+						 <input type="text" class="form-control"  id= "track_no" placeholder="Enter Track Number"> 
+						  <span style="display:none;color:red;"  id="track_no_error">Please Enter Valid Track Number</span>
+						<span style="display:none;color:red;"  id="t_error">"This Tracking number does not exists, Please enter correct tracking number"</span>
+						</div>
+						<div class="col-md-6" style="text-align: left;">
+							<span type="submit" id="save" class="btn btn-info" style="background: green;" onclick="track()" >Track</span>
+						</div>
+					</div>
+			</form>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	</section>
+	<section  id="check_list" style="display:none;">
+		<div class="row" style="text-align: center;">
+			<div class="col-md-12">
+			 <h2>Tracking Details</h2>
+			</div>
+			<div class="col-md-8 offset-md-2">
+			<div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+							  <th>City Name</th>
+                                <th>Warehouse</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+						
+                        <tbody>
+							{% for i in list %}
+                            <tr>
+                               {% if i.package_awb_number.city %}	
+								<td>{{i.package_awb_number.city}}</td>
+							{% else %}
+								<td> - </td>
+							{% endif %}
+							{% if i.warehouse_name.city %}
+                                <td>{{i.warehouse_name.city}}</td>
+							{% else %}
+								<td>-</td>
+							{% endif %}
+							{% if i.date %}
+                                <td>{{i.date}}</td>
+							{% else %}
+								<td>-</td>
+							{% endif %}
+                           {% if i.time %}
+                                <td>{{i.time}}</td>
+							{% else %}
+								<td>-</td>
+							{% endif %}
+							{% if i.type %}
+                                <td>{{i.type}}</td>
+							{% else %}
+								<td>-</td>
+							{% endif %}
+                            </tr>
+							{% endfor %}
+                          </tbody>
+                    </table>
+                </div>
+			</div>
+		</div>
+	</section>
+	<footer>
+        <div class="container">
+            <div class="row" style="padding: 2px;">
+                <div class="col-md-12">
+                    <div class="footer-contact">
+                        <p style="font-size:20px;  float: right;  margin-left:10%">Courier Tracking </p>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </footer>
+    <div class="header-fixed-placeholder"></div>
+       
+<script>   
+$(document).ready(function(){
+var showHeaderAt = 150;
+var win = $(window),
+		body = $('body');
+
+if(win.width() > 400){
+	win.on('scroll', function(e){
+		if(win.scrollTop() > showHeaderAt) {
+			body.addClass('fixed');
+		}
+		else {
+			body.removeClass('fixed');
+		}
+	});
+}
+});
+$(document).ready(function(){
+$(document).bind('keypress', function(e) {
+if(e.keyCode==13){
+	 $('#button_submit').trigger('click');
+ }
+});
+});
+$(window, document, undefined).ready(function() {
+
+  $('input').blur(function() {
+    var $this = $(this);
+    if ($this.val())
+      $this.addClass('used');
+    else
+      $this.removeClass('used');
+  });
+  var $ripples = $('.ripples');
+  $ripples.on('click.Ripples', function(e) {
+    var $this = $(this);
+    var $offset = $this.parent().offset();
+    var $circle = $this.find('.ripplesCircle');
+    var x = e.pageX - $offset.left;
+    var y = e.pageY - $offset.top;
+
+    $circle.css({
+      top: y + 'px',
+      left: x + 'px'
+    });
+    $this.addClass('is-active');
+  });
+  $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
+  	$(this).removeClass('is-active');
+  });
+
+});
+</script>
+<script>
+$("#track_no").keyup(function(){
+	$("#t_error").hide();
+});
+function track(){ 
+	var track_no = $("#track_no").val()
+	console.log(track_no)
+	if (track_no == "")
+	{
+	$('#track_no_error').show()
+	}
+	else{
+	$.ajax({
+			method : "POST",
+			url : "/search_track/",
+			data : {
+			
+					'track_no':track_no,
+			},
+			success : function(response){
+				console.log(response)
+				if(response == "error"){
+					$('#t_error').show()
+				}
+				else{
+						$('#check_list').show();
+						$('#check_list').html("");
+						$('#check_list').html(response);
+						
+					}
+			}
+		});
+	}
+}
+$("#track_no").keyup(function(){
+	$("#track_no_error").hide();
+});
+
+</script>
+</body>
+</html>                                                                                                                                                                                                                                                                                         

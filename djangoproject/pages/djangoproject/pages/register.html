@@ -1,0 +1,912 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Tree Based Tourism</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'vendor_login/bootstrap/css/bootstrap.min.css' %}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'fonts_login/font-awesome-4.7.0/css/font-awesome.min.css' %}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"> -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link rel="stylesgeet" href="https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css">
+<style>
+body{
+		overflow-x:hidden;
+}
+.bg{
+    height: 69px;
+    z-index: 466;
+    <!-- background: transparent url({% static 'images/registerbg.jpg' %}) no-repeat center center; -->
+    background-size: cover;
+}
+.dropdown-menu.bootstrap-datetimepicker-widget.open {
+    opacity: 1;
+    transform: scale(1);
+    top: 0;
+	background-color:white;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    padding: 4px;
+    width: 19em;
+}
+.bootstrap-datetimepicker-widget .list-unstyled {
+    margin: 0;
+}
+
+.sr-only,
+.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action="clear"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action="today"]::after,
+.bootstrap-datetimepicker-widget .picker-switch::after,
+.bootstrap-datetimepicker-widget table th.prev::after,
+.bootstrap-datetimepicker-widget table th.next::after {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.bootstrap-datetimepicker-widget {
+    list-style: none;
+}
+
+.bootstrap-datetimepicker-widget a:hover {
+    box-shadow: none !important;
+}
+
+.bootstrap-datetimepicker-widget a .btn:hover {
+    background-color: transparent;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    padding: 4px;
+    width: 19em;
+}
+
+@media (min-width: 768px) {
+    .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+        width: 38em;
+    }
+}
+
+@media (min-width: 991px) {
+    .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+        width: 38em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+        width: 38em;
+    }
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before,
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+    right: auto;
+    left: 12px;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu.top {
+    margin-top: auto;
+    margin-bottom: 27px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.top.open {
+    margin-top: auto;
+    margin-bottom: 27px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
+    left: auto;
+    right: 6px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {
+    left: auto;
+    right: 7px;
+}
+.bootstrap-datetimepicker-widget .list-unstyled {
+    margin: 0;
+}
+.bootstrap-datetimepicker-widget a[data-action] {
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    background-color: transparent;
+    color: #9c27b0;
+    box-shadow: none;
+}
+.bootstrap-datetimepicker-widget a[data-action]:hover {
+    background-color: transparent;
+}
+.bootstrap-datetimepicker-widget a[data-action]:hover span {
+    background-color: #eee;
+    color: #9c27b0;
+}
+.bootstrap-datetimepicker-widget a[data-action]:active {
+    box-shadow: none;
+}
+.bootstrap-datetimepicker-widget .timepicker-hour,
+.bootstrap-datetimepicker-widget .timepicker-minute,
+.bootstrap-datetimepicker-widget .timepicker-second {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 300;
+    font-size: 1.125rem;
+    margin: 0;
+    border-radius: 50%;
+}
+.bootstrap-datetimepicker-widget button[data-action] {
+    width: 38px;
+    height: 38px;
+    margin-right: 3px;
+    padding: 0;
+}
+.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
+    content: "Increment Hours";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
+    content: "Increment Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
+    content: "Decrement Hours";
+}
+
+.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
+    content: "Decrement Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after {
+    content: "Show Hours";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after {
+    content: "Show Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after {
+    content: "Toggle AM/PM";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="clear"]::after {
+    content: "Clear the picker";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="today"]::after {
+    content: "Set the date to today";
+}
+
+.bootstrap-datetimepicker-widget .picker-switch {
+    text-align: center;
+    border-radius: 3px;
+    font-size: 0.875rem;
+}
+
+.bootstrap-datetimepicker-widget .picker-switch::after {
+    content: "Toggle Date and Time Screens";
+}
+.bootstrap-datetimepicker-widget .picker-switch td {
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: auto;
+    line-height: inherit;
+}
+
+.bootstrap-datetimepicker-widget .picker-switch td span {
+    line-height: 2.5;
+    height: 2.5em;
+    width: 100%;
+    border-radius: 3px;
+    margin: 2px 0px !important;
+}
+
+.bootstrap-datetimepicker-widget table {
+    width: 100%;
+    margin: 0;
+}
+
+.bootstrap-datetimepicker-widget table.table-condensed tr>td {
+    text-align: center;
+}
+
+.bootstrap-datetimepicker-widget table td>div,
+.bootstrap-datetimepicker-widget table th>div {
+    text-align: center;
+}
+.bootstrap-datetimepicker-widget table th {
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+    font-weight: 500;
+}
+.bootstrap-datetimepicker-widget table th.picker-switch {
+    width: 145px;
+}
+.bootstrap-datetimepicker-widget table th.disabled,
+.bootstrap-datetimepicker-widget table th.disabled:hover {
+    background: none;
+    color: rgba(0, 0, 0, 0.12);
+    cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget table th.prev span,
+.bootstrap-datetimepicker-widget table th.next span {
+    border-radius: 3px;
+    height: 27px;
+    width: 27px;
+    line-height: 28px;
+    font-size: 12px;
+    border-radius: 50%;
+    text-align: center;
+}
+.bootstrap-datetimepicker-widget table th.prev::after {
+    content: "Previous Month";
+}
+
+.bootstrap-datetimepicker-widget table th.next::after {
+    content: "Next Month";
+}
+.bootstrap-datetimepicker-widget table th.dow {
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    font-size: 12px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 400;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+.bootstrap-datetimepicker-widget table thead tr:first-child th {
+    cursor: pointer;
+}
+.bootstrap-datetimepicker-widget table thead tr:first-child th:hover span,
+.bootstrap-datetimepicker-widget table thead tr:first-child th.picker-switch:hover {
+    background: #eee;
+}
+.bootstrap-datetimepicker-widget table td>div {
+    border-radius: 3px;
+    height: 54px;
+    line-height: 54px;
+    width: 54px;
+    text-align: center;
+}
+.bootstrap-datetimepicker-widget table td.cw>div {
+    font-size: .8em;
+    height: 20px;
+    line-height: 20px;
+    color: #999;
+}
+.bootstrap-datetimepicker-widget table td.day>div {
+    height: 30px;
+    line-height: 30px;
+    width: 30px;
+    text-align: center;
+    padding: 0px;
+    border-radius: 50%;
+    position: relative;
+    z-index: -1;
+    color: #3C4858;
+    font-size: 0.875rem;
+}
+.bootstrap-datetimepicker-widget table td.minute>div,
+.bootstrap-datetimepicker-widget table td.hour>div {
+    border-radius: 50%;
+}
+.bootstrap-datetimepicker-widget table td.day:hover>div,
+.bootstrap-datetimepicker-widget table td.hour:hover>div,
+.bootstrap-datetimepicker-widget table td.minute:hover>div,
+.bootstrap-datetimepicker-widget table td.second:hover>div {
+    background: #eee;
+    cursor: pointer;
+}
+.bootstrap-datetimepicker-widget table td.old>div,
+.bootstrap-datetimepicker-widget table td.new>div {
+    color: #999;
+}
+.bootstrap-datetimepicker-widget table td.today>div {
+    position: relative;
+}
+.bootstrap-datetimepicker-widget table td.today>div:before {
+    content: '';
+    display: inline-block;
+    border: 0 0 7px 7px solid transparent;
+    border-bottom-color: #9c27b0;
+    border-top-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+}
+.bootstrap-datetimepicker-widget table td.active>div,
+.bootstrap-datetimepicker-widget table td.active:hover>div {
+    background-color: #9c27b0;
+    color: #fff;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+}
+.bootstrap-datetimepicker-widget table td.active.today:before>div {
+    border-bottom-color: #fff;
+}
+.bootstrap-datetimepicker-widget table td.disabled>div,
+.bootstrap-datetimepicker-widget table td.disabled:hover>div {
+    background: none;
+    color: rgba(0, 0, 0, 0.12);
+    cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget table td span {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 3px 3px;
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+}
+.bootstrap-datetimepicker-widget table td span:hover {
+    background: #eee;
+}
+.bootstrap-datetimepicker-widget table td span.active {
+    background-color: #9c27b0;
+    color: #fff;
+}
+.bootstrap-datetimepicker-widget table td span.old {
+    color: #999;
+}
+.bootstrap-datetimepicker-widget table td span.disabled,
+.bootstrap-datetimepicker-widget table td span.disabled:hover {
+    background: none;
+    color: rgba(0, 0, 0, 0.12);
+    cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget .timepicker-picker span,
+.bootstrap-datetimepicker-widget .timepicker-hours span,
+.bootstrap-datetimepicker-widget .timepicker-minutes span {
+    border-radius: 50% !important;
+}
+.bootstrap-datetimepicker-widget.usetwentyfour td.hour {
+    height: 27px;
+    line-height: 27px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.top.open{
+		background-color:white;
+}
+<!-- .p-t-178 { -->
+    <!-- padding-top: 120px; -->
+<!-- } -->
+<!-- .container-login100 { -->
+        <!-- width: 100%; -->
+        <!-- min-height: 70vh; -->
+        <!-- display: -webkit-box; -->
+        <!-- display: -webkit-flex; -->
+        <!-- display: -moz-box; -->
+        <!-- display: -ms-flexbox; -->
+        <!-- display: flex; -->
+        <!-- flex-wrap: wrap; -->
+        <!-- justify-content: center; -->
+        <!-- align-items: center; -->
+        <!-- padding: 15px; -->
+        <!-- position: relative; -->
+        <!-- background-color: #fff -->
+    <!-- } -->
+	<!-- .wrap-login100 { -->
+    <!-- width: 1000px; -->
+    <!-- background: #fff; -->
+    <!-- border-radius: 20px; -->
+    <!-- overflow: hidden; -->
+    <!-- box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .1); -->
+    <!-- -moz-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .1); -->
+    <!-- -webkit-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .1); -->
+    <!-- -o-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .1); -->
+    <!-- -ms-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .1); -->
+<!-- } -->
+<!-- .p-b-40 { -->
+    <!-- padding-bottom: 17px; -->
+<!-- } -->
+hgroup { 
+	text-align:center;
+	margin-top: 4em;
+}
+h1, h3 { font-weight: 300; }
+h1 { color: #636363; }
+h3 { color: #fd7506    ; }
+form {
+	padding: 0em 2em 2em 2em;
+	border:none;
+	margin-top:20px;
+}
+.group { 
+	position: relative; 
+	margin-bottom: 25px; 
+}
+input {
+	font-size: 18px;
+	padding: 10px 10px 6px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background: #fafafa;
+	color: #636363;
+	width: 100%;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #757575;
+}
+
+input:focus { outline: none; }
+
+label {
+	color: #999; 
+	font-size: 18px;
+	font-weight: normal;
+	position: absolute;
+	pointer-events: none;
+	left: 5px;
+	top: 10px;
+	transition: all 0.2s ease;
+}
+/* active */
+input:focus ~ label, input.used ~ label {
+	top: -20px;
+  transform: scale(.75); left: -2px;
+	/* font-size: 14px; */
+	color: #020202   ;
+}
+/* Under */
+.bar {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+.bar:before, .bar:after {
+	content: '';
+	height: 2px; 
+	width: 0;
+	bottom: 1px; 
+	position: absolute;
+	background: #020202   ; 
+	transition: all 0.2s ease;
+}
+
+.bar:before { left: 50%; }
+.bar:after { right: 50%; }
+/* act */
+input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
+/* highlight */
+.highlight {
+	position: absolute;
+	height: 60%; 
+	width: 100px; 
+	top: 25%; 
+	left: 0;
+	pointer-events: none;
+	opacity: 0.5;
+}
+/* active */
+input:focus ~ .highlight {
+	animation: inputHighlighter 0.3s ease;
+}
+/* animation */
+@keyframes inputHighlighter {
+	from { background: #fd7506    ; }
+	to 	{ width: 0; background: transparent; }
+}
+/* Button */
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  margin: .3em 0 1em 0;
+  width: 100%;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 16px;
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid #3160B6;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.button:focus { outline: 0; }
+/* Button modifiers */
+.buttonBlue {
+  background: #fd7506    ;
+  text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+}
+.buttonBlue:hover { background: #357bd8; }
+/* Ripples container */
+.ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+/*  circle */
+.ripplesCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.ripples.is-active .ripplesCircle {
+  animation: ripples .4s ease-in;
+}
+/* animation */
+
+@keyframes ripples {
+  0% { opacity: 0; }
+
+  25% { opacity: 1; }
+
+100%{
+    width: 200%;
+    padding-bottom: 200%;
+    opacity: 0;
+  }
+}
+.form-bg{
+    text-align: center;
+    margin-top: 30px;
+    border: 1px solid #f18704;;
+  margin-bottom: 30px;
+    box-shadow: 0px 0px 4px 0px;
+    border-radius: 30px;
+}
+.login100-form-title {
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    text-align: center;
+    display: block;
+    width: 100%;
+    top: 0;
+    left: 0;
+	background-image: linear-gradient(to bottom right, #fca91b , #fd7506 );
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.login100-form-btn {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+   height: 50px;
+    background-image: linear-gradient(to bottom right, #fca318,#fd7b08 );
+    border-radius: 10px;
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+	float: right;
+}
+.header-fixed {
+    background-color: #292c2f80;
+    /* box-shadow: 0 1px 1px #ccc; */
+    padding: 20px 40px;
+    height: 71px;
+    color: #ffffff;
+    box-sizing: border-box;
+    top: -100px;
+    -webkit-transition: top 0.3s;
+    transition: top 0.3s;
+}
+</style>
+<body>
+    <section class="bg">
+    <!-- <div class="container top"> -->
+        <!-- <div class="row"> -->
+         <!-- </div> -->
+    <!-- </div> -->
+            <header class="header-fixed">
+                    <div class="header-limiter">              
+                        <h1 style="font-family: Courier;"><a href="#">Tree Based Tourism</a></h1>
+                         <nav>
+                            <a href="/">HOME</a>
+                            <a href="/">ABOUT US</a>
+                            <!-- <a href="/">SERVICES</a> -->
+                            <!-- <a href="/">CONTACT</a> -->
+							<!-- <a href="#service">BMI Calculator</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+                            <a href="/customer_webpage_login/">LOGIN</a>
+                            <!-- <a href="/user_webpage_register/">SIGN UP</a> -->
+                        </nav>               
+                    </div>               
+                </header> 
+                <!-- <div class="container register">
+                          <h1 class="page">Sign Up</h1>
+                 </div>
+                -->
+    </section>
+    <section>
+		<div class="row">
+		<div class="col-md-4 offset-md-4">
+		<div class="form-bg">
+		<span class="login100-form-title">
+					<!-- <h2>Sign Up</h2> -->
+					<h2>Customer Registration</h2>
+					</span>			
+				<form>
+			
+					  <div class="group">
+						<input type="text" name="name" id="name"><span class="highlight"></span><span class="bar"></span>
+					<label>	<i class="fa fa-user" aria-hidden="true"></i> &nbsp; Name</label>
+					  <center><span style="display:none;color:red" id ="name_error">Please Enter Name </span></center>
+					  </div>
+					    <div class="group">
+						<input type="text" name="address" id="address"><span class="highlight"></span><span class="bar"></span>
+					<label>	<i class="fa fa-user" aria-hidden="true"></i> &nbsp; Address</label>
+					 <center><span style="display:none;color:red" id ="address_error">Please Enter Address </span></center>
+					  </div>
+					  
+					  <div class="group">
+						<input type="text"  name="mobile_no" id="mobile_no"  pattern="\d*" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength = "11"><span class="highlight"></span><span class="bar"></span>
+						<label><i class="fa fa-mobile" aria-hidden="true"></i> &nbsp; Mobile No.</label>
+						 <center><span style="display:none;color:red" id ="mobile_no_error">Please Enter Mobile Number </span></center>
+					  </div>
+					  
+					<div class="group">
+						<input type="text" name="email" id="email"><span class="highlight"></span><span class="bar"></span>
+						<label><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp; Email</label>
+							 <center><span style="display:none;color:red" id ="email_error">Please Enter Valid Email Address </span></center>
+					</div>
+					   
+					<div class="group">
+						<input type="password" name="password" id="password"><span class="highlight"></span><span class="bar"></span>
+						<label><i class="fa fa-key" aria-hidden="true"></i> &nbsp; Password</label>
+						<center><span style="display:none;color:red" id ="password_error">Please Enter Password </span></center> 
+					</div>
+					  
+					  <div class="group">
+						<input type="password" name="cnf_password" id="cnf_password"><span class="highlight"></span><span class="bar"></span>
+						<label><i class="fa fa-key" aria-hidden="true"></i> &nbsp; Confirm Password</label>
+						<center><span style="display:none;color:red" id ="cnf_password_error">Please Enter Confirm Password </span></center> 
+						<center><span style="display:none;color:red" id ="password_match_error">Password Does Not Match</span></center> 
+					  </div>			
+					<div style="text-align:center"> 
+						<button type="button" class="login100-form-btn" id="button_submit" onclick="SignUp()" style="margin-top:20px;">
+							Sign Up
+						</button>
+					</div> 
+			</form>
+			</div>
+			</div>
+			</div>   
+    </section>
+   <footer>
+        <div class="container">
+            <div class="row" style="padding: 2px;">
+                <div class="col-md-12">
+                        <div class="footer-contact">
+                                <!-- <span><img src="{% static 'images/terms.png' %}" style="width:11%"></span> -->
+                                <p style="font-size:20px;  float: right;  margin-left:10%">Tree Based Tourism </p>
+                        </div>
+                 </div>
+            </div>
+        </div>
+    </footer>
+        <div class="header-fixed-placeholder"></div>
+        <!-- Central Modal Small -->
+<div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<!-- Change class .modal-sm to change the size of the modal -->
+<div class="modal-dialog modal-sm" role="document">
+  <div class="modal-content" style="border: 2px solid rgb(7, 199, 255);">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="text-align: center;">
+      <p>You are Successfully Registered</p>
+    </div>
+    <div class="modal-footer">
+		<!-- <button type="button" class="btn btn-success btn-sm" id="approve" onclick= "save_new_details()" style="padding: 4px 10px; ">Save</button> -->
+		 <button type="button" id="ok"class="btn btn-secondary btn-sm" data-dismiss="modal">Ok</button>
+      <!-- <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button> -->
+    </div>
+  </div>
+</div>
+</div>
+    <script>  
+        $(document).ready(function(){    
+            var showHeaderAt = 150;    
+            var win = $(window),
+                    body = $('body');   
+            // Show the fixed header only on larger screen devices    
+            if(win.width() > 400){
+                // scroll more than 150px down, we set the
+                // "fixed" the class on the body element.  
+                win.on('scroll', function(e){    
+                    if(win.scrollTop() > showHeaderAt) {
+                        body.addClass('fixed');
+                    }
+                    else {
+                        body.removeClass('fixed');
+                    }
+                });    
+            }   
+        });
+  
+  var emailfilter = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i
+ function SignUp(){
+   
+   var name = $("#name").val()
+   var address = $("#address").val()
+   var mobile_no = $("#mobile_no").val()
+   var email = $("#email").val()
+   var password = $("#password").val()
+   var cnf_password = $("#cnf_password").val()
+   
+	console.log(name)
+	console.log(address)
+	console.log(email)
+	console.log(mobile_no)
+	console.log(password)
+	console.log(cnf_password)	
+	if (name == "")
+	{
+	$('#name_error').show()
+	}
+	
+	else if(address == "")
+	{
+	$('#address_error').show()
+	}
+	
+	else if(mobile_no == "")
+	{
+	$('#mobile_no_error').show()
+	}
+	
+	else if(email == "")
+	{
+	$('#email_error').show()
+	}
+	
+	else if(! emailfilter.test(email)){
+		$("#email_error").show();
+	}	
+	else if(password == "")
+	{
+	$('#password_error').show()
+	}
+	else if(cnf_password == "")
+	{
+	$('#cnf_password_error').show()
+	}
+	else if(password !=  cnf_password){
+		$("#password_match_error").show();
+	}
+	else{
+	$.ajax({
+			method : "POST",
+			url : "/store_register_details/",
+			data : {
+					'name':name,
+					'address':address,
+					'email':email,
+					'mobile_no':mobile_no,
+					'password':password,
+					'cnf_password':cnf_password,
+			},
+			success : function(response){
+				console.log(response)
+				if (response == "success"){
+					$('#centralModalSm').modal("show")
+					$( "#ok" ).click(function() {
+					location.href = "/customer_webpage_login/";
+					});					
+				}
+				else if(response == "Exists"){						
+						location.href = "/customer_register/";
+				
+				}				
+			}
+		});
+	}
+}
+$('#name').keyup(function(){
+$('#name_error').hide();
+})
+$('#address').keyup(function(){
+$('#address_error').hide();
+})
+$('#email').keyup(function(){
+$('#email_error').hide();
+})
+$('#mobile_no').keyup(function(){
+$('#mobile_no_error').hide();
+})
+$('#password').keyup(function(){
+$('#password_error').hide();
+})
+$('#cnf_password').keyup(function(){
+$('#cnf_password_error').hide();
+})
+$('#cnf_password').keyup(function(){
+$('#password_match_error').hide();
+})
+
+$(window, document, undefined).ready(function() {
+
+  $('input').blur(function() {
+    var $this = $(this);
+    if ($this.val())
+      $this.addClass('used');
+    else
+      $this.removeClass('used');
+  });
+  var $ripples = $('.ripples');
+  $ripples.on('click.Ripples', function(e) {
+
+    var $this = $(this);
+    var $offset = $this.parent().offset();
+    var $circle = $this.find('.ripplesCircle');
+    var x = e.pageX - $offset.left;
+    var y = e.pageY - $offset.top;
+
+    $circle.css({
+      top: y + 'px',
+      left: x + 'px'
+    });
+    $this.addClass('is-active');
+  });
+  $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
+  	$(this).removeClass('is-active');
+  });
+
+});
+$(document).ready(function() {
+    $('body').bootstrapMaterialDesign();
+    
+       $('.timepicker').datetimepicker({
+//          format: 'H:mm',    // use this format if you want the 24hours timepicker
+           format: 'h:mm A',    //use this format if you want the 12hours timpiecker with AM/PM toggle
+           icons: {
+               time: "fa fa-clock-o",
+               date: "fa fa-calendar",
+               up: "fa fa-chevron-up",
+               down: "fa fa-chevron-down",
+               previous: 'fa fa-chevron-left',
+               next: 'fa fa-chevron-right',
+               today: 'fa fa-screenshot',
+               clear: 'fa fa-trash',
+               close: 'fa fa-remove'
+           }
+        });
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>   
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script src="https://rawgit.com/creativetimofficial/material-kit/master/assets/js/core/jquery.min.js"></script>
+    <script src="https://rawgit.com/creativetimofficial/material-kit/master/assets/js/core/bootstrap-material-design.min.js"></script>
+    <script src="https://rawgit.com/creativetimofficial/material-kit/master/assets/js/plugins/moment.min.js"></script>
+    <script src="https://rawgit.com/creativetimofficial/material-kit/master/assets/js/plugins/bootstrap-datetimepicker.js"></script>
+    <script src="https://rawgit.com/creativetimofficial/material-kit/master/assets/js/material-kit.js"></script>
+    </body>
+    </html>
