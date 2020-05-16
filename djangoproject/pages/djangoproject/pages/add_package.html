@@ -1,0 +1,457 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Courier Tracking</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/dash.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<style>
+.file{
+  margin-right: 15px;
+    margin-left: 15px;
+}
+.right{
+  text-align: right;
+}
+@media (min-width: 768px){
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+}
+.edit {
+    padding-top: 7px;   
+    padding-right: 7px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+}
+
+.edit a {
+    color: #000;
+}
+
+
+.profile-pic {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-pic:hover .edit {
+    display: block;
+}
+
+.imagediv {
+    float:left;
+    margin-top:50px;
+}
+.imagediv .showonhover {
+    background:red;
+    padding:20px;
+    opacity:0.9;
+    color:white;
+    width: 100%;
+    display:block;  
+    text-align:center;
+    cursor:pointer;
+}
+</style>
+<body>
+  
+    
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+          <i class="fa fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+          <div class="sidebar-content">
+           <div class="sidebar-brand">
+        <a href="#">Courier Tracking</a>
+        <div id="close-sidebar">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+            <div class="sidebar-header">
+              <div class="user-info">
+                <span class="user-name">Welcome 
+
+                </span>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+              <ul>
+             
+                <!-- <li class="sidebar"> -->
+                    <!-- <a href="/dashboard/"> -->
+                        <!-- <i class="fa fa-plus"></i> -->
+                        <!-- <span>Add Warehouse</span> -->
+                        <!-- </a> -->
+                <!-- </li> -->
+                <!-- <li class="sidebar"> -->
+                        <!-- <a href="/view_warehouse/"> -->
+                            <!-- <i class="fa fa-tasks"></i> -->
+                            <!-- <span>Manage Warehouse</span> -->
+                            <!-- </a> -->
+                <!-- </li> -->
+                
+                <li class="sidebar">
+                    <a href="/package/">
+                        <i class="fa fa-plus"></i>
+                        <span>Add Package</span>
+                        </a>
+                </li>
+                
+                <li class="sidebar">
+                        <a href="/view_package/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Manage Package</span>
+                            </a>
+                </li>
+                <li class="sidebar">
+                    <a href="/check_in/">
+                        <i class="fa fa-plus"></i>
+                        <span>Check In Package</span>
+                        </a>
+                </li>
+                <li class="sidebar">
+                    <a href="/check_out/">
+                        <i class="fa fa-plus"></i>
+                        <span>Check Out Package</span>
+                        </a>
+                </li>
+                <li class="sidebar">
+                        <a href="/check_list/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Check List</span>
+                            </a>
+                </li>
+                
+                <li class="sidebar">
+                        <a href="/logout/">
+                           <i class="fa fa-power-off"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+                   </ul>
+            </div>
+           </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+          <div class="container-fluid">
+            <h2>Add Package</h2>
+            <hr>
+           <div class="row">
+             <div class="col-md-8 offset-md-2">
+                <form class="form-horizontal">
+                <!-- <div class="row form-group"> -->
+                    <!-- <label class="control-label col-sm-3" for="email">Tracking Number :</label> -->
+                    <!-- <div class="col-sm-9"> -->
+                      <!-- <input type="text" class="form-control"  id= "awb_no" placeholder="Enter AWB Number"> -->
+                      <!-- <span style="display:none;color:red;"  id="awb_no_error">Please Enter  AWB Number</span> -->
+                      
+                    <!-- </div> -->
+                    <!-- </div> -->
+                  <div class="row form-group">
+                    <label class="control-label col-sm-3" for="email">AWB Number :</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control"  id= "package_id" placeholder="Enter AWB Number" value = "{{package_id}}" readonly>
+                      <span style="display:none;color:red;"  id="awb_no_error">Please Enter  AWB Number</span>
+                    </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="email">Receiver Name:</label>
+                      <div class="col-sm-9">
+                        <input type= "text" class="form-control" id="receiver_name" placeholder="Enter Receiver Name">
+                        <span style="display:none;color:red;"  id="receiver_name_error">Please Enter Receiver Name</span>
+                    </div>
+                    </div>
+                      
+                     <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email">Mobile Number:</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="mobile_no"   maxlength = "12" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9.+]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Enter Mobile Number" >
+                            <span style="display:none;color:red;"  id="mobile_no_error">Please Enter Mobile Number</span>
+                          </div>
+                          </div>
+                         
+                         
+                          <div class="row form-group">
+                              <label class="control-label col-sm-3" for="email">  Address :</label>
+                              <div class="col-sm-9">
+                                <textarea class="form-control"  id="address" placeholder="Enter  Address"></textarea>
+                                <span style="display:none;color:red;"  id="address_error">Please Enter  Address</span>
+                              </div>
+                          </div>
+                          
+                          <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email">City :</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="city" placeholder="Enter City">
+                            <span style="display:none;color:red;"  id="city_error">Please Enter City</span>
+                          </div>
+                          </div>
+                          <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email"> Pincode :</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="pincode" placeholder="Enter Pincode"  pattern="\d*" oninput="this.value = this.value.replace(/[^0-9.+]/g, '').replace(/(\..*)\./g, '$1');">
+                            <span style="display:none;color:red;"  id="pincode_error">Please Enter Pincode</span>
+                          </div>
+                          </div>
+                        <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email"> From Address :</label>
+                          <div class="col-sm-9">
+                            <textarea class="form-control"  id="from_address" placeholder="Enter From Address"></textarea>
+                            <span style="display:none;color:red;"  id="from_address_error">Please Enter From Address</span>
+                          </div>
+                          </div>
+                          
+                            <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email"> From City :</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="from_city" placeholder="Enter From City">
+                            <span style="display:none;color:red;"  id="from_city_error">Please Enter From City</span>
+                          </div>
+                          </div>
+                          
+                          <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email"> From Pincode :</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="from_pincode" placeholder="Enter From Pincode" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9.+]/g, '').replace(/(\..*)\./g, '$1');">
+                            <span style="display:none;color:red;"  id="from_pincode_error">Please Enter From Pincode</span>
+                          </div>
+                          </div>
+                            
+                        <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email"> Cost:</label>
+                          <div class="col-sm-9">
+                            <input type="number" class="form-control"  id="cost" placeholder="Enter Cost">
+                            <span style="display:none;color:red;"  id="cost_error">Please Enter Cost</span>
+                          </div>
+                          </div>
+                          
+                            <div class="row form-group">
+                      <label class="control-label col-sm-3" for="email">Weight:</label>
+                      <div class="col-sm-9">
+                        <input type= "text" class="form-control" id="weight" placeholder="Enter Weight">
+                        <span style="display:none;color:red;"  id="weight_error">Please Enter Weight  </span>
+                    </div>
+                    </div>
+                    
+                          <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email"> Status :</label>
+                          <div class="col-sm-9">
+                            <!-- <input type="text" class="form-control"  id="status" placeholder="Enter Status"> -->
+                        <select name = "status" id ="status" class="form-control" >
+                                <option id= "Shipment_Picked_Up" value="Shipment Picked Up" selected>Shipment Picked Up</option>
+                                <option id= "In_Transit" value="In Transit">In Transit</option>
+                                <option id= "Out_for_Delivery" value="Out for Delivery">Out for Delivery</option>
+                                <option id= "Reached" value="Reached">Reached</option>
+                            
+                        </select>
+                            <span style="display:none;color:red;"  id="status_error">Please Enter Status</span>
+                          </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="offset-sm-6 col-sm-6" style="margin-top:20px;">
+                                <span type="submit" id="save" class="btn btn-primary"  class="btn btn-primary" style="background: green;" onclick="save_data()">Save</span>
+                            </div>
+                            </div>
+                </form>
+            </div>
+            </div>
+           </main>
+        </div>
+<script>
+jQuery(function ($) {
+
+$(".sidebar-dropdown > a").click(function() {
+$(".sidebar-submenu").slideUp(200);
+if (
+$(this)
+  .parent()
+  .hasClass("active")
+) {
+$(".sidebar-dropdown").removeClass("active");
+$(this)
+  .parent()
+  .removeClass("active");
+} else {
+$(".sidebar-dropdown").removeClass("active");
+$(this)
+  .next(".sidebar-submenu")
+  .slideDown(200);
+$(this)
+  .parent()
+  .addClass("active");
+}
+});
+
+$("#close-sidebar").click(function() {
+$(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function() {
+$(".page-wrapper").addClass("toggled");
+});
+
+});
+
+</script>
+
+<script>
+function save_data(){ 
+    var package_id = $("#package_id").val()
+    var receiver_name = $("#receiver_name").val()
+    var mobile_no = $("#mobile_no").val()
+    var address = $("#address").val()
+    var city = $("#city").val()
+    var pincode = $("#pincode").val()
+    var from_address = $("#from_address").val()
+    var from_city = $("#from_city").val()
+    var from_pincode = $("#from_pincode").val()
+    var cost = $("#cost").val()
+    var weight = $("#weight").val()
+    var status = $("#status").val()
+
+    console.log(package_id)
+    console.log(receiver_name)
+    console.log(mobile_no)
+    console.log(from_address)
+    console.log(status)
+    console.log(weight)
+    
+    if(receiver_name == "")
+    {
+    $('#receiver_name_error').show()
+    }
+    else if(mobile_no == "")
+    {
+    $('#mobile_no_error').show()
+    }
+    else if(address == "")
+    {
+    $('#address_error').show()
+    }
+    else if(city == "")
+    {
+    $('#city_error').show()
+    }
+    else if(pincode == "")
+    {
+    $('#pincode_error').show()
+    }
+    else if(from_address == "")
+    {
+    $('#from_address_error').show()
+    }
+
+    else if(from_city == "")
+    {
+        $('#from_city_error').show()
+    }
+    else if(from_pincode == "")
+    {
+        $('#from_pincode_error').show()
+    }
+    
+    else if(cost == "")
+    {
+        $('#cost_error').show()
+    }
+    else if(weight == "")
+    {
+        $('#weight_error').show()
+    }
+    else if(status == "")
+    {
+        $('#status_error').show()
+    }
+    else{
+    $.ajax({
+            method : "POST",
+            url : "/store_package/",
+            data : {
+                    'package_id':package_id,
+                    'receiver_name':receiver_name,
+                    'mobile_no':mobile_no,
+                    'address':address,
+                    'city':city,
+                    'pincode':pincode,
+                    'from_address':from_address,
+                    'from_city':from_city,
+                    'from_pincode':from_pincode,
+                    'cost':cost,
+                    'weight':weight,
+                    'status':status,
+                    
+            },
+            success : function(response){
+                console.log(response)
+                if (response == "success")swal({
+                title: "Package Added Successfully",
+                icon: "success",
+                button: "Ok",
+                closeOnClickOutside: false,
+            }).then(function() {
+                location.reload();
+            }); 
+                else if(response == "Exists"){
+                        
+                        location.href = "/customer_register/";
+                
+                }
+                
+            }
+        });
+    }
+}
+
+$("#receiver_name").keyup(function(){
+    $("#receiver_name_error").hide();
+});
+
+$("#mobile_no").keyup(function(){
+    $("#mobile_no_error").hide();
+});
+
+$("#address").keyup(function(){
+    $("#address_error").hide();
+});
+
+$("#city").keyup(function(){
+    $("#city_error").hide();
+});
+
+$("#pincode").keyup(function(){
+    $("#pincode_error").hide();
+});
+$("#from_address").keyup(function(){
+    $("#from_address_error").hide();
+});
+$("#from_city").keyup(function(){
+    $("#from_city_error").hide();
+});
+$("#from_pincode").keyup(function(){
+    $("#from_pincode_error").hide();
+});
+$("#cost").keyup(function(){
+    $("#cost_error").hide();
+});
+$("#status").change(function(){
+    $("#status_error").hide();
+});
+
+</script>  
+</body>
+</html>                                                                                   

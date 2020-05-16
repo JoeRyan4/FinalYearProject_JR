@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Courier Tracking </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<style>
+.btn-outline-primary:hover {
+    color: #fff;
+   background-image: linear-gradient(to bottom right, #fca91b,#fd7506 );
+    border-color: #007bff;
+}.btn-primary {
+    color: #fff;
+    background-color: #fca91b;
+    border-color: #fd7506;
+}}
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #fca91b;
+    border-color: #fd7506;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #fca91b;
+    border-color: #fd7506;
+}
+.container-fluid {
+  background-color: e8eae9;
+  width: 266px;
+  height: 143px;
+  border: 2px solid #5e5dc7;
+  margin-top: -56px;
+  border-radius: 12px;
+padding-top: 21px;
+}
+</style>
+<body>
+    <section class="bg">
+    <div class="container top">
+        <div class="row"style="float: right;">				
+         </div>
+    </div>
+            <header class="header-fixed">
+                    <div class="header-limiter">               
+                        <h1 style="font-family: Courier;"><a href="#" >Courier Tracking </a></h1>
+                         <nav>
+                            <a href="#"><b>HOME<b></a>                       
+                           <a href="#login">LOGIN</a>
+						    <a href="/track_package/"><b> Track Your Package</b></a>
+							<!-- <a href="/user_webpage_register/">SIGN UP</a> -->
+                        </nav>
+                    </div>             
+                </header> 
+                <div class="container text">
+                      <h1 class="page" style="font-family:Times New Roman">Track Your Courier Every Step Of The Way</h1>
+                </div>
+    </section>
+  	<section class="pb pt grey" id= "login" >
+        <div class="container">            
+				<div class="container-fluid" >							
+					<div class="wrapper-container" style=" margin-left:50%; font-size:130%">					
+						<div class="row" style = "margin-left: -63px;color:dc0000">
+							<div >
+								<a href="/admin_webpage_login/">Admin Login</a>  
+							</div>
+						</div>						
+						<div class = "row" style = "margin-left: -63px;color:dc0000">
+							<div > 
+								<a href="/warehouse_webpage_login/">Warehouse Login</a> <br>
+							</div>
+						</div>
+						<!-- <div class = "row"> -->
+								<!-- <div  > -->
+									<!-- <a href="/customer_register/">Customer Registration</a> -->
+								<!-- </div> -->
+						<!-- </div> -->
+					</div>							
+				</div>				
+                </div>           
+    </section>  
+<footer>
+        <div class="container">
+            <div class="row" style="padding: 2px;">
+                <div class="col-md-12">
+                        <div class="footer-contact">
+                                <!-- <span><img src="{% static 'images/terms.png' %}" style="width:11%"></span> -->
+                                <p style="font-size:20px;  float: right;  margin-left:10%">Courier Tracking </p>
+                        </div>
+                 </div>
+            </div>
+        </div>
+    </footer>
+    <div class="header-fixed-placeholder"></div>  
+<script>
+    $(document).ready(function(){
+        var showHeaderAt = 150;
+        var win = $(window),
+                body = $('body');
+        // Show the fixed header only on larger screen devices
+        if(win.width() > 400){
+            // When we scroll more than 150px down, we set the
+            // "fixed" class on the body element.
+            win.on('scroll', function(e){
+
+                if(win.scrollTop() > showHeaderAt) {
+                    body.addClass('fixed');
+                }
+                else {
+                    body.removeClass('fixed');
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

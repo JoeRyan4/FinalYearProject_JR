@@ -1,0 +1,388 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Courier Tracking</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/dash.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<style>
+.file{
+  margin-right: 15px;
+    margin-left: 15px;
+}
+.right{
+  text-align: right;
+}
+@media (min-width: 768px){
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+}
+.edit {
+	padding-top: 7px;	
+	padding-right: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
+}
+.edit a {
+	color: #000;
+}
+.profile-pic {
+	position: relative;
+	display: inline-block;
+}
+
+.profile-pic:hover .edit {
+	display: block;
+}
+.imagediv {
+	float:left;
+    margin-top:50px;
+}
+.imagediv .showonhover {
+	background:red;
+	padding:20px;
+	opacity:0.9;
+	color:white;
+	width: 100%;
+	display:block;	
+	text-align:center;
+	cursor:pointer;
+}
+</style>
+<body>
+  
+    
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+          <i class="fa fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+          <div class="sidebar-content">
+           <div class="sidebar-brand">
+        <a href="#">Courier Tracking</a>
+        <div id="close-sidebar">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+            <div class="sidebar-header">
+              <div class="user-info">
+                <span class="user-name">Welcome 
+
+                </span>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+              <ul>
+             
+				<li class="sidebar">
+                    <a href="/package/">
+                        <i class="fa fa-plus"></i>
+                        <span>Add Package</span>
+                        </a>
+                </li>
+				
+				<li class="sidebar">
+                        <a href="/view_package/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Manage Package</span>
+                            </a>
+                </li>
+				
+				
+				<li class="sidebar">
+                    <a href="/check_in/">
+                        <i class="fa fa-plus"></i>
+                        <span>Check In Package</span>
+                        </a>
+                </li>
+				
+				<li class="sidebar">
+                    <a href="/check_out/">
+                        <i class="fa fa-plus"></i>
+                        <span>Check Out Package</span>
+                        </a>
+                </li>
+				
+				<li class="sidebar">
+                        <a href="/check_list/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Check List</span>
+                            </a>
+                </li>
+				
+				
+					 <li class="sidebar">
+                        <a href="/logout/">
+                           <i class="fa fa-power-off"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+					
+                   </ul>
+            </div>
+           </div>
+        </nav>
+        <!-- sidebar-wrappers to include in  -->
+        <main class="page-content">
+          <div class="container-fluid">
+            <h2>Check In </h2>
+            <hr>
+           <div class="row">
+             <!-- <div class="col-md-10 offset-md-2"> -->
+             <div class="col-md-12 ">
+				<form class="form-horizontal">
+               
+					
+					
+					 <div class="row form-group">
+                    <label class="control-label col-sm-2" for="email">AWB Number <span style="color:red">*</span>:</label>
+                    <div class="col-sm-5">
+                   <input type="text" class="form-control"  id= "awb_no" placeholder="Enter AWB Number">
+					<span  id="awb_no_error" style="display:none;color:red;" >Please AWB Number</span>
+                    </div>
+					 <div class="col-sm-4">
+							<!-- <div class="col-md-6" style="text-align: left;"> -->
+							<span type="submit" id="save" class="btn btn-info" style="background: green;" onclick="search()" >Search</span>
+						<!-- </div> -->
+                    </div>
+					
+                    </div>
+					
+	<div id = "data_id">
+					<div class="row form-group">
+                    <label class="control-label col-sm-2" for="email">Receiver Name :</label>
+                    <div class="col-sm-5">
+					  <input type="text" class="form-control"  id= "receiver_name" placeholder="Enter Receiver Name">
+					<span  id="awb_no_error" style="display:none;color:red;" >Please Enter Receiver Name</span>
+                    </div>
+                    </div>
+					  
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" for="email">Destination :</label>
+                        <div class="col-sm-5">
+                        <input type="text" class="form-control"  id= "destination_city" placeholder="Enter  Destination">
+						<span  id="destination_city_error" style="display:none;color:red;" >Please Enter Destination</span>
+							
+						</div>
+                    
+					</div>
+                         
+                            
+					<div class="row form-group">
+                        <label class="control-label col-sm-2" for="email">Phone Number</label>
+                        <div class="col-sm-5">
+						 <input type="text" class="form-control"  id= "phone_no" placeholder="Enter  Phone Number">
+						<span  id="phone_no_error" style="display:none;color:red;" >Please Enter Phone Number</span>
+						</div>
+                    
+					</div>
+					
+					<div class="row form-group">
+						<label class="control-label col-sm-2" for="email">Destination Pincode :</label>
+						<div class="col-sm-5">
+							 <input type="text" class="form-control"  id= "destination_pincode" placeholder="Enter  Destination Pincode">
+						<span  id="destination_pincode_error" style="display:none;color:red;" >Please Enter Destination Pincode</span>
+					
+						</div>
+                    </div>        
+					 
+					<div class="form-group">
+						<div class="offset-sm-6 col-sm-6" style="margin-top:20px;">
+							<span type="submit" id="save" class="btn btn-primary"  class="btn btn-primary" style="background: green;" onclick="save_data()">Save</span>
+						</div>
+					</div>
+			</div>
+                </form>
+
+            </div>
+            </div>
+			</div>
+           </main>
+
+<script>
+
+jQuery(function ($) {
+
+$(".sidebar-dropdown > a").click(function() {
+$(".sidebar-submenu").slideUp(200);
+if (
+$(this)
+  .parent()
+  .hasClass("active")
+) {
+$(".sidebar-dropdown").removeClass("active");
+$(this)
+  .parent()
+  .removeClass("active");
+} else {
+$(".sidebar-dropdown").removeClass("active");
+$(this)
+  .next(".sidebar-submenu")
+  .slideDown(200);
+$(this)
+  .parent()
+  .addClass("active");
+}
+});
+
+$("#close-sidebar").click(function() {
+$(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function() {
+$(".page-wrapper").addClass("toggled");
+});
+
+});
+
+</script>
+
+<script>
+function search(){
+	var awb_no = $("#awb_no").val()
+	
+	
+	console.log(awb_no)
+	
+	if (awb_no == "")
+	{
+	$('#awb_no_error').show()
+	}
+
+	
+	else{
+	$.ajax({
+			method : "POST",
+			url : "/search_awb_no/",
+			data : {
+					'awb_no':awb_no,
+				
+			},
+			
+			success : function(response){
+				console.log(response)
+				if(response == "error"){
+					$('#t_error').show()
+					alert("Package Does Not Exist !")
+				}
+				else{
+						$('#data_id').show();
+						$('#data_id').html("");
+						$('#data_id').html(response);
+						
+					}
+				
+			}
+		});
+	}
+}
+function save_data(){ 
+	var awb_no = $("#awb_no").val()
+	var receiver_name = $("#receiver_name").val()
+	var destination_city = $("#destination_city").val()
+	var phone_no = $("#phone_no").val()
+	var destination_pincode = $("#destination_pincode").val()
+	
+	console.log(awb_no)
+	console.log(receiver_name)
+	console.log(destination_city)
+	console.log(phone_no)
+	console.log(destination_pincode)
+
+	
+	if (awb_no == "")
+	{
+	$('#awb_no_error').show()
+	}
+	<!-- if (package_id_id == "") -->
+	<!-- { -->
+	<!-- $('#awb_no_error').show() -->
+	<!-- } -->
+	else if (receiver_name == "")
+	{
+	$('#receiver_name_error').show()
+	}
+	else if(destination_city == "")
+	{
+	$('#destination_city_error').show()
+	}
+	else if(phone_no == "")
+	{
+	$('#phone_no_error').show()
+	}
+	
+	else if(destination_pincode == "")
+	{
+		$('#destination_pincode_error').show()
+	}
+	
+	else{
+	$.ajax({
+			method : "POST",
+			url : "/store_checkin_detail/",
+			data : {
+					'awb_no':awb_no,
+					'receiver_name':receiver_name,
+					'destination_city':destination_city,
+					'phone_no':phone_no,
+					'destination_pincode':destination_pincode,
+					
+			},
+			
+			
+			success : function(response){
+				console.log(response)
+				if (response == "success")swal({
+				title: "Check In Added Successfully",
+				icon: "success",
+				button: "Ok",
+				closeOnClickOutside: false,
+			}).then(function() {
+				location.reload();
+			});	
+				else if(response == "Exists"){
+						
+						location.href = "/customer_register/";
+				
+				}
+				
+			}
+		});
+	}
+}
+
+$("#awb_no").change(function(){
+	$("#awb_no_error").hide();
+});
+
+$("#name").change(function(){
+	$("#name_error").hide();
+});
+
+$("#date").change(function(){
+	$("#date_error").hide();
+});
+
+$("#time").change(function(){
+	$("#time_error").hide();
+});
+
+$("#staus").change(function(){
+	$("#staus_error").hide();
+});
+</script>  
+</body>
+</html>                                                                                                                                                                                                                                                                                         
+   

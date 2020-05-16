@@ -1,0 +1,372 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Salon</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/jquery-ui-1.12.1/jquery-ui.min.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/font-awesome/css/font-awesome.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/Ionicons/css/ionicons.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/dist/css/AdminLTE.min.css' %}">
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/dist/css/mystyle.css' %}">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/dist/css/skins/_all-skins.min.css' %}">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/morris.js/morris.css' %}">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/jvectormap/jquery-jvectormap.css' %}">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/bootstrap-daterangepicker/daterangepicker.css' %}">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css' %}">
+  <!-- select 2 tag -->
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/select2.min.css' %}">
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/plugins/timepicker/bootstrap-timepicker.min.css' %}">
+  <!-- DataTables -->  
+  <link rel="stylesheet" href="{% static 'SaloonApp/AdminApp/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
+  
+  <!-- DataTables -->
+<!-- <!-- <!-- <!-- for map Address --> 
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"> -->
+<script data-cfasync="false" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=AIzaSyD2oSPfpe8KK9fStd-9Sj_GlvQVo66FcGE&callback=initMap"> -->
+ <!-- </script> -->
+ <script data-cfasync='false' type='text/javascript' src='https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyD2oSPfpe8KK9fStd-9Sj_GlvQVo66FcGE'></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.js"></script> -->
+  <!-- jQuery 3 -->
+<script src="{% static 'SaloonApp/AdminApp/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'SaloonApp/AdminApp/bower_components/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<!-- DataTables -->
+<script src="{% static 'SaloonApp/AdminApp/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'SaloonApp/AdminApp/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+  <!-- Google Style font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <!-- for box -->
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rasterizehtml/1.3.0/rasterizeHTML.js"></script>
+  <!-- <script src="{% static 'TaxiApp/j	sPDF-1.3.2/dict/jspdf.min.js' %}"></script> -->
+  <!-- <script src="{% static 'TaxiApp/jsPDF-1.3.2/plugins/addhtml.js' %}"></script> -->
+  <!-- <script src="{% static 'TaxiApp/jsPDF-1.3.2/plugins/addimage.js' %}"></script> -->
+  <script src="{% static 'SaloonApp/jsPDF-1.3.2/libs/html2canvas/dist/html2canvas.js' %}"></script>
+  <script src="{% static 'SaloonApp/AdminApp/plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+ <style>
+	@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+
+/****** Style Star widget *****/
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+/** CSS Highlight **/
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } 
+.rating > input:checked + label:hover, 
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, 
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+ </style>
+  
+ <style>
+	html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+.container {
+  width: 100%;
+  display: flex;
+}
+#map-canvas-left, #map-canvas-right {
+	height: 250px;
+  width: 550px;
+}
+#iw_container .iw_title {
+	font-size: 16px;
+	font-weight: bold;
+}
+.iw_content {
+	padding: 15px 15px 15px 0;
+}
+</style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini" style="font-family: 'Roboto' !important; color: #525252;">
+
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/dashboard_page/" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><h6><b>SalonApp</b></h6></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>SalonApp</b></span>
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-onlysr-only"></span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            		  
+          <!-- User Account: style-->
+          <li class="dropdown user user-menu"> 
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="hidden-xs">Welcome&nbsp; Admin</span>
+            </a>
+            <ul class="dropdown-menu" style="width:20px">
+
+              <li class="user-footer" style="background-color: #ecf0f5;padding: 0px">
+                <div class="pull-right">
+                  <a href="/adminpanel/"><button class="btn btn-sm btn-danger"><i class="fa fa-sign-out" aria-hidden="true"></i> SignOut</button></a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li>
+          <a href="/dashboard/">
+            <i class="fa fa-dashboard"></i><span> Dashboard</span>
+          </a>
+        </li>
+		<li>
+          <a href="/customer_page/">
+            <i class="fa fa-users"></i> <span>Customer List</span>
+          </a>
+        </li>
+        <li>
+          <a href="/saloon_page/">
+            <i class="fa fa-bicycle"></i><span> Salon List</span>
+          </a>
+        </li>
+		<!-- <li> -->
+          <!-- <a href="/saloon_services/"> -->
+            <!-- <i class="fa fa-bicycle"></i><span> Service List</span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+		<li class="treeview">
+		  <a href="#">
+            <i class="fa fa-book"></i> <span> Booking Report</span>
+			<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+		  <ul class="treeview-menu">
+			<li>
+				<a href="/booking/">
+				<i class="fa fa-book"></i><span>All Booking</span>
+				</a>
+			</li>
+			<li>
+				<a href="/saloonwise_booking/">
+				<i class="fa fa-book"></i><span>Salon wise Booking</span>
+				</a>
+			</li>
+			 </ul>
+			<!-- <li> -->
+				<!-- <a href="/cust_payment/"> -->
+				<!-- <i class="fa fa-book"></i><span>Customer Payment</span> -->
+				<!-- </a> -->
+			<!-- </li> -->
+		 </ul>
+		 </li>
+		  <!--<ul class="treeview-menu">
+            <li id="ongoingride"><a href="/current_ride/" style="font-size: 13px !important;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-bicycle" aria-hidden="true"></i> Ongoing Ride </a></li>
+            <li id="completedride"><a href="/completed_ride/" style="font-size: 13px !important;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check" aria-hidden="true"></i> Completed Ride </a></li>
+            <li id="cancellledride"><a href="/cancelled_ride/" style="font-size: 13px !important;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-times" aria-hidden="true"></i> Cancelled Ride </a></li>
+          </ul>
+        </li>
+		<li class="treeview">
+		  <a href="#">
+            <i class="fa fa-book"></i> <span> Area Management</span>
+			<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+		  <ul class="treeview-menu">
+            <li id="cityarea"><a href="/current_ride/" style="font-size: 13px !important;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-bicycle" aria-hidden="true"></i> City Area </a></li>
+            <li id="parkingarea"><a href="/completed_ride/" style="font-size: 13px !important;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check" aria-hidden="true"></i> Parking Area </a></li>
+          </ul>
+        </li>-->
+		
+		 <!-- <ul class="treeview-menu"> -->
+		<!-- <li> -->
+          <!-- <a href="/transaction_history/"> -->
+            <!-- <i class="fa fa-book"></i><span> Transaction History</span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+		 <!-- </ul> -->
+		<!-- <li> -->
+          <!-- <a href="/BookingPrice/"> -->
+            <!-- <i class="fa fa-eur" ></i><span> Booking Rate</span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+		<!-- <li> -->
+          <!-- <a href="/Report/"> -->
+            <!-- <i class="fa fa-pencil-square-o"></i><span> Report</span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+		<!-- <li> -->
+          <!-- <a href="/User_Contacts/"> -->
+            <!-- <i class="fa fa-pencil-square-o"></i><span> Web Enquiry</span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+    <!-- <li> -->
+          <!-- <a href="/addproduct/"> -->
+            <!-- <i class="fa fa-files-o"></i><span>Add Product</span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+        <!-- <li> -->
+          <!-- <a href="/shopDetails/"> -->
+            <!-- <i class="fa fa-th"></i> <span>Shop Registration</span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+    <!-- <li> -->
+          <!-- <a href="/Offers/"> -->
+            <!-- <i class="fa fa-th"></i> <span>Offers</span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+	 <!-- <li> -->
+          <!-- <a href="/brandmaster/"> -->
+            <!-- <i class="fa fa-th"></i> <span>Brand </span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+	<!-- <li> -->
+          <!-- <a href="/joblisting/"> -->
+            <!-- <i class="fa fa-th"></i> <span>Job Listing </span> -->
+          <!-- </a> -->
+        <!-- </li> -->
+		<!-- <li>
+          <a href="#">
+            <i class="fa fa-th"></i> <span>Total Registered User </span>
+          </a>
+        </li>
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>Payment Received Reports  </span>
+			<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+		  <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Day Wise </a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Weekly </a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Monthly </a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-pie-chart"></i><span>Failed Payment Detail</span>
+          </a>
+        </li> -->
+		<!-- <li>
+          <a href="#">
+            <i class="fa fa-pie-chart"></i><span>Discount</span>
+          </a>
+        </li>
+		<li>
+          <a href="#">
+            <i class="fa fa-pie-chart"></i><span>Offers</span>
+          </a>
+        </li>
+		<li>
+          <a href="#">
+            <i class="fa fa-pie-chart"></i><span>Coupon code Used details</span>
+          </a>
+        </li>
+		<li>
+          <a href="#">
+            <i class="fa fa-pie-chart"></i><span>Ads detail for User App</span>
+          </a>
+        </li>
+        <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li> -->
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+<script>
+<!-- $(document).ready(function(){ -->
+	<!-- $('.dropdown-menu').click(function(event){ -->
+	   <!-- event.stopPropagation(); -->
+	<!-- }); -->
+<!-- }); -->
+<!-- function RemoveNotification(id){ -->
+	<!-- var notification_id = id -->
+	<!-- $.ajax({ -->
+		<!-- method : "POST", -->
+		<!-- url : "/RemoveAdminNotification/", -->
+		<!-- data : { -->
+			<!-- 'notification_id':notification_id, -->
+		<!-- }, -->
+		<!-- success : function(rendered){ -->
+			<!-- $('#adminnotificationdiv').html("") -->
+			<!-- $('#adminnotificationdiv').html(rendered) -->			
+		<!-- } -->
+	<!-- }) -->
+<!-- } -->
+<!-- function RemoveUserNotification(id){ -->
+	<!-- var contactinfo_id = id -->
+	<!-- $.ajax({ -->
+		<!-- method : "POST", -->
+		<!-- url : "/RemoveUserNotification/", -->
+		<!-- data : { -->
+			<!-- 'contactinfo_id':contactinfo_id, -->
+		<!-- }, -->
+		<!-- success : function(rendered){ -->
+			<!-- $('#usernotificationdiv').html("") -->
+			<!-- $('#usernotificationdiv').html(rendered) -->			
+		<!-- } -->
+	<!-- }) -->
+<!-- } -->
+
+</script>

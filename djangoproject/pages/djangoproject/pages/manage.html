@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Tree Based Tourism</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<style>
+
+.file{
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.right{
+  text-align: right;
+}
+@media (min-width: 768px){
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+}
+.image{
+    border:1px solid black;
+    box-shadow:0px 0px 2px 0px;
+    width:100%;
+}
+.button{
+    margin-top:20px;
+    text-align: center;
+}
+</style>
+<style>
+.file{
+  margin-right: 15px;
+   margin-left: 15px;
+}
+.right{
+  text-align: right;
+}
+@media (min-width: 768px){
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+}
+.image{
+     width:100%;
+     padding-top: 20px;
+}
+.button{
+    margin-top:20px;
+    text-align: center;
+    padding-bottom: 20px;;
+}
+.manage{
+    border:1px solid black;
+    box-shadow:0px 0px 2px 0px;
+    background: #f7f7f7;
+}
+.bold{
+    font-weight: bold ;
+}
+.book{
+    background-image: linear-gradient(#02350e, #03a729);
+    padding: 4px 10px;
+    border: 1px solid green;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+
+}
+.booknow{
+    float: right;
+    padding-top: 50px;
+}
+</style>
+<body>   
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+          <i class="fa fa-bars"></i>
+        </a>	
+	<section class="bg" >
+    <div class="container top">
+        <div class="row">
+         </div>
+    </div>
+            <header class="header-fixed">
+                    <div class="header-limiter">                                    
+                        <h1 style="font-family: Courier;"><a href="#">Tree Based Tourism</a></h1>
+                         <nav>							
+							<a href="#">Package</a>                       
+                            <a href="/logout/">logout</a>
+                         
+                        </nav>
+                    </div>
+                </header>              
+    </section>
+	        <!-- sidebar-wrapper  -->
+       <main class="page-content" style="padding-left:0px;">
+          <div class="container-fluid">
+		  <div class="row">
+				<div class="col-md-8 offset-md-2">
+				 <h2>Package</h2>
+            <hr>
+	{% for i in obj_list %}
+           <div class="row manage">
+                <div class="col-md-4" style="text-align: center; padding-top: 30px;">                  
+                  <img class="media-object" src="{{i.image_one.url}}" style="width: 250px; height: 250px;"> </a>                            
+                    <div class="button">
+					<button style = "padding: 2px 4px;" class="btn btn-primary" id="edit" onclick="view('{{i.id}}','{{i.image_one}}','{{i.image_two}}','{{i.image_three}}')">View all</button>
+                    </div>			
+                </div>  
+                <div class="col-md-8"  style="padding: 10px;">
+                   <table>
+                       <tbody>						
+                           <tr>
+                               <td><span class="bold">Package Name : {{i.package_name}}</span></td>
+                           </tr>
+                            <tr>
+                                <td><span class="bold"> Itinerary Description  :{{i.itinerary_description}}</span></td>
+                           </tr>
+                           <tr>
+                                <td><span class="bold">City Name : {{i.city_name}}</span></td>
+                           </tr>
+                           <tr>
+                                <td><span class="bold">Suitable Months :{{i.suitable_month}}</span></td>
+                           </tr>
+                           <tr>
+                                <td><span class="bold">Suitable For :{{i.suitable_for}}</span></td>
+                           </tr>					
+                       </tbody>		
+                   </table>
+                   <div class="booknow">
+                    <button type="submit" class="book" onclick="book()">Book Now</button>
+                    </div>			
+                </div>
+            </div>
+{% endfor %}
+        </div>
+				</div>
+		  </div>           
+          </main>
+        </div>
+        <div class="modal fade" id="imageModal">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">             
+                    <!-- M Header -->
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                         <!-- Modal body -->
+                    <div class="modal-body">
+                       <div class="row">
+					<input type="hidden" id ="id" name="id" value="{{obj_list.id}}">	
+                                <div class="col-md-4">
+                                <img  value="{{obj_list.image_one.url}}" id="image_one_modal" src="{{obj_list.image_one.url}}" class="image" >
+                                </div>
+								
+                                <div class="col-md-4">
+                                        <img  value="{{obj_list.image_two.url}}" src="{{obj_list.image_two.url}}" class="image" >
+                                </div>
+                                <div class="col-md-4">
+                                        <img value="{{obj_list.image_three.url}}" src="{{obj_list.image_three.url}}" class="image" >
+                                </div>
+                        </div>
+                    </div>                  
+                   </div>
+                </div>
+              </div>
+<script>
+function view(id,image_one,image_two,image_three){
+	$('#id').val(id);
+	$('#image_one').val(image_one);
+	$('#image_two').val(image_two);
+	$('#image_three').val(image_three);
+	console.log(image_three)
+	$('#imageModal').modal("show");
+}
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+   jQuery(function ($) {
+$(".sidebar-dropdown > a").click(function() {
+$(".sidebar-submenu").slideUp(200);
+if (
+$(this)
+  .parent()
+  .hasClass("active")
+) {
+$(".sidebar-dropdown").removeClass("active");
+$(this)
+  .parent()
+  .removeClass("active");
+} else {
+$(".sidebar-dropdown").removeClass("active");
+$(this)
+  .next(".sidebar-submenu")
+  .slideDown(200);
+$(this)
+  .parent()
+  .addClass("active");
+}
+});
+$("#close-sidebar").click(function() {
+$(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function() {
+$(".page-wrapper").addClass("toggled");
+});
+});
+function book(){
+swal({
+				title: "Book Successfully",
+				icon: "success",
+				button: "Ok",
+				closeOnClickOutside: false,
+			})
+}
+</script>
+</body>
+</html>                                           

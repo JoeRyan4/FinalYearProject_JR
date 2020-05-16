@@ -1,0 +1,62 @@
+<div id ="data_id">			
+				{% for i in list%}
+					<div class="row form-group">
+                    <label class="control-label col-sm-2" for="email">Receiver Name :</label>
+                    <div class="col-sm-5">
+					  <input type="text" class="form-control"  id= "receiver_name"  value = "{{i.receiver_name}}"  placeholder="Enter Receiver Name">
+					<span  id="receiver_name_error" style="display:none;color:red;" >Please Enter Receiver Name</span>
+                    </div>
+                    </div>
+					  
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" for="email">Destination :</label>
+                        <div class="col-sm-5">
+                        <input type="text" class="form-control"  id= "destination_city"  value = "{{i.city}}"  placeholder="Enter  Destination">
+						<span  id="destinatiom_city_error" style="display:none;color:red;" >Please Enter Destination</span>
+						</div>
+					</div>
+					
+				<div class="row form-group">
+					<label class="control-label col-sm-2" for="email">Status:</label>
+					<div class="col-sm-5">
+					<select name = "status" id ="status" class="form-control" >
+						<option value= "" selected>-----Select-----</option>
+						<option id= "Send" value="Send">Send </option>
+						<option id= "Out_For_Delivery" value="Out For Delivery">Out For Delivery</option>
+					</select>
+					<span id="staus_error"  style="display:none;color:red;"  >Please Select Status</span>
+					</div>
+				</div>    
+				
+				
+					<div id="specific_user"  class="row form-group"  style="display: none">
+					<label class="control-label col-sm-2" for="email">Select Warehouse:</label>
+					<div class="col-sm-5">
+					<select class="form-control" id ="name">
+						<option value= "" selected>-----Select-----</option>
+							{% for i in warehouse_obj %}
+							<option value="{{i.name}}">{{i.name}}</option>
+							{% endfor %}
+					</select>
+					<!-- <span id="name_error"  style="display:none;color:red;"  >Please Select Status</span> -->
+					</div>
+				</div>        
+				<div class="form-group">
+					<div class="offset-sm-6 col-sm-6" style="margin-top:20px;">
+						<span type="submit" id="save" class="btn btn-primary"  class="btn btn-primary" style="background: green;" onclick="save_data()">Save</span>
+					</div>
+				</div>
+				{%endfor%}
+				</div>
+				
+	<script>
+	$(function () {
+        $("#status").change(function () {
+            if ($(this).val() == "Send") {
+                $("#specific_user").show();
+            } else {
+                $("#specific_user").hide();
+            }
+        });
+    });
+	</script>

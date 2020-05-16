@@ -1,0 +1,45 @@
+<div id = "data_id">
+{%for i in list %}
+					<div class="row form-group">
+                    <label class="control-label col-sm-2" for="email">Receiver Name :</label>
+                    <div class="col-sm-5">
+					  <input type="text" class="form-control"  id= "receiver_name"  value = "{{i.receiver_name}}"  placeholder="Enter Receiver Name">
+					<span  id="receiver_name_error" style="display:none;color:red;" >Please Enter Receiver Name</span>
+                    </div>
+                    </div>
+					  <!-- classes for each group  -->
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" for="email">Destination :</label>
+                        <div class="col-sm-5">
+                        <input type="text" class="form-control"  id= "destination_city"  value = "{{i.city}}"  placeholder="Enter  Destination">
+						<span  id="destination_city_error" style="display:none;color:red;" >Please Enter Destination</span>
+							
+						</div>
+					</div>
+                         
+                            
+					<div class="row form-group">
+                        <label class="control-label col-sm-2" for="email">Phone Number</label>
+                        <div class="col-sm-5">
+						 <input type="text" class="form-control"  id= "phone_no"  value = "{{i.mobile_no}}"  placeholder="Enter  Phone Number">
+						<span  id="phone_no_error" style="display:none;color:red;" >Please Enter Phone Number</span>
+						</div>
+                    
+					</div>
+					
+					<div class="row form-group">
+						<label class="control-label col-sm-2" for="email">Destination Pincode :</label>
+						<div class="col-sm-5">
+							 <input type="text" class="form-control"  id= "destination_pincode"   value = "{{i.pincode}}"   placeholder="Enter  Destination Pincode">
+						<span  id="destination_pincode_error" style="display:none;color:red;" >Please Enter Destination Pincode</span>
+					
+						</div>
+                    </div>        
+					 
+					<div class="form-group">
+						<div class="offset-sm-6 col-sm-6" style="margin-top:20px;">
+							<span type="submit" id="save" class="btn btn-primary"  class="btn btn-primary" style="background: green;" onclick="save_data()">Save</span>
+						</div>
+					</div>
+			</div>
+			{%endfor%}

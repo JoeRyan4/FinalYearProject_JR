@@ -1,0 +1,454 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Balanced Diet </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'vendor_login/bootstrap/css/bootstrap.min.css' %}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'fonts_login/font-awesome-4.7.0/css/font-awesome.min.css' %}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}"> -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<style>
+.bg{
+    height: 110px;
+    z-index: 466;
+    <!-- background: transparent url({% static 'images/registerbg.jpg' %}) no-repeat center center; -->
+    background-size: cover;
+}
+body{
+		overflow-x:hidden;
+}
+hgroup { 
+	text-align:center;
+	margin-top: 4em;
+}
+h1, h3 { font-weight: 300; }
+h1 { color: #636363; 
+h3 { color: #fd7506    ; }
+form {
+	padding: 0em 2em 2em 2em;
+	border:none;
+	margin-top:20px;
+}
+
+<!-- .group {  -->
+	<!-- position: relative;  -->
+	<!-- margin-bottom: 25px;  -->
+<!-- } -->
+<!-- input { -->
+	<!-- font-size: 18px; -->
+	<!-- padding: 10px 10px 10px 5px; -->
+	<!-- -webkit-appearance: none; -->
+	<!-- display: block; -->
+	<!-- background: #fafafa; -->
+	<!-- color: #636363; -->
+	<!-- width: 100%; -->
+	<!-- border: none; -->
+	<!-- border-radius: 0; -->
+	<!-- border-bottom: 1px solid #757575; -->
+<!-- } -->
+<!-- input:focus { outline: none; } -->
+<!-- /* Label */ -->
+<!-- label { -->
+	<!-- color: #999;  -->
+	<!-- font-size: 18px; -->
+	<!-- font-weight: normal; -->
+	<!-- position: absolute; -->
+	<!-- pointer-events: none; -->
+	<!-- left: 5px; -->
+	<!-- top: 10px; -->
+	<!-- transition: all 0.2s ease; -->
+<!-- } -->
+<!-- /* active */ -->
+<!-- input:focus ~ label, input.used ~ label { -->
+	<!-- top: -20px; -->
+  <!-- transform: scale(.75); left: -2px; -->
+	<!-- /* font-size: 14px; */ -->
+	<!-- color: #020202   ; -->
+<!-- } -->
+<!-- /* Underline */ -->
+<!-- .bar { -->
+	<!-- position: relative; -->
+	<!-- display: block; -->
+	<!-- width: 100%; -->
+<!-- } -->
+<!-- .bar:before, .bar:after { -->
+	<!-- content: ''; -->
+	<!-- height: 2px;  -->
+	<!-- width: 0; -->
+	<!-- bottom: 1px;  -->
+	<!-- position: absolute; -->
+	<!-- background: #020202   ;  -->
+	<!-- transition: all 0.2s ease; -->
+<!-- } -->
+<!-- .bar:before { left: 50%; } -->
+<!-- .bar:after { right: 50%; } -->
+<!-- /* active */ -->
+<!-- input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; } -->
+<!-- /* Highlight */ -->
+<!-- .highlight { -->
+	<!-- position: absolute; -->
+	<!-- height: 60%;  -->
+	<!-- width: 100px;  -->
+	<!-- top: 25%;  -->
+	<!-- left: 0; -->
+	<!-- pointer-events: none; -->
+	<!-- opacity: 0.5; -->
+<!-- } -->
+<!-- /* is active inpu */ -->
+<!-- input:focus ~ .highlight { -->
+	<!-- animation: inputHighlighter 0.3s ease; -->
+<!-- } -->
+<!-- /* Animations 'Frames' */ -->
+<!-- @keyframes inputHighlighter { -->
+	<!-- from { background: #fd7506    ; } -->
+	<!-- to 	{ width: 0; background: transparent; } -->
+<!-- } -->
+<!-- /* Button */ -->
+
+<!-- .button { -->
+  <!-- position: relative; -->
+  <!-- display: inline-block; -->
+  <!-- padding: 12px 24px; -->
+  <!-- margin: .3em 0 1em 0; -->
+  <!-- width: 100%; -->
+  <!-- vertical-align: middle; -->
+  <!-- color: #fff; -->
+  <!-- font-size: 16px; -->
+  <!-- line-height: 20px; -->
+  <!-- -webkit-font-smoothing: antialiased; -->
+  <!-- text-align: center; -->
+  <!-- letter-spacing: 1px; -->
+  <!-- background: transparent; -->
+  <!-- border: 0; -->
+  <!-- border-bottom: 2px solid #3160B6; -->
+  <!-- cursor: pointer; -->
+  <!-- transition: all 0.15s ease; -->
+<!-- } -->
+<!-- .button:focus { outline: 0; } -->
+
+<!-- /* Button modifiers */ -->
+<!-- .buttonBlue { -->
+  <!-- background: #fd7506    ; -->
+  <!-- text-shadow: 1px 1px 0 rgba(39, 110, 204, .5); -->
+<!-- } -->
+
+<!-- .buttonBlue:hover { background: #357bd8; } -->
+<!-- /* Ripples container */ -->
+<!-- .ripples { -->
+  <!-- position: absolute; -->
+  <!-- top: 0; -->
+  <!-- left: 0; -->
+  <!-- width: 100%; -->
+  <!-- height: 100%; -->
+  <!-- overflow: hidden; -->
+  <!-- background: transparent; -->
+<!-- } -->
+<!-- /* Ripple circle effect */ -->
+<!-- .ripplesCircle { -->
+  <!-- position: absolute; -->
+  <!-- top: 50%; -->
+  <!-- left: 50%; -->
+  <!-- transform: translate(-50%, -50%); -->
+  <!-- opacity: 0; -->
+  <!-- width: 0; -->
+  <!-- height: 0; -->
+  <!-- border-radius: 50%; -->
+  <!-- background: rgba(255, 255, 255, 0.25); -->
+<!-- } -->
+
+<!-- .ripples.is-active .ripplesCircle { -->
+  <!-- animation: ripples .4s ease-in; -->
+<!-- } -->
+<!-- /* Ripples animation */ -->
+<!-- @keyframes ripples { -->
+  <!-- 0% { opacity: 0; } -->
+
+  <!-- 25% { opacity: 1; } -->
+
+  <!-- 100% { -->
+    <!-- width: 200%; -->
+    <!-- padding-bottom: 200%; -->
+    <!-- opacity: 0; -->
+  <!-- } -->
+<!-- } -->
+<!-- .form-bg{ -->
+    <!-- text-align: center; -->
+    <!-- margin-top: 85px; -->
+    <!-- border: 1px solid #f18704;; -->
+  <!-- margin-bottom: 85px; -->
+    <!-- box-shadow: 0px 0px 4px 0px; -->
+    <!-- border-radius: 30px; -->
+<!-- } -->
+<!-- .login100-form-title { -->
+    <!-- font-size: 30px; -->
+    <!-- color: #fff; -->
+    <!-- line-height: 1.2; -->
+    <!-- text-align: center; -->
+    <!-- display: block; -->
+    <!-- width: 100%; -->
+    <!-- top: 0; -->
+    <!-- left: 0; -->
+   <!-- background-image: linear-gradient(to bottom right, #fca91b , #fd7506 ); -->
+    <!-- padding-top: 6px; -->
+    <!-- padding-bottom: 6px; -->
+    <!-- border-top-left-radius: 30px; -->
+    <!-- border-top-right-radius: 30px; -->
+<!-- } -->
+<!-- .login100-form-btn { -->
+   <!-- display: flex; -->
+    <!-- justify-content: center; -->
+    <!-- align-items: center; -->
+    <!-- padding: 0 20px; -->
+   <!-- height: 50px; -->
+    <!-- background-image: linear-gradient(to bottom right, #fca318,#fd7b08 ); -->
+    <!-- border-radius: 10px; -->
+    <!-- font-size: 15px; -->
+    <!-- color: #fff; -->
+    <!-- line-height: 1.2; -->
+	<!-- float: right; -->
+<!-- } -->
+<!-- textarea { -->
+    <!-- font-size: .8rem; -->
+    <!-- letter-spacing: 1px; -->
+<!-- } -->
+<!-- textarea { -->
+    <!-- padding: 10px; -->
+    <!-- line-height: 1.5; -->
+    <!-- border-radius: 5px; -->
+    <!-- border: 1px solid #ccc; -->
+    <!-- box-shadow: 1px 1px 1px #999; -->
+<!-- } -->
+
+<!-- label { -->
+    <!-- display: block; -->
+    <!-- margin-bottom: 10px; -->
+<!-- } -->
+</style>
+<body>
+    <section class="bg">
+    <div class="container top">
+        <div class="row">
+         </div>
+    </div>
+            <header class="header-fixed">
+                    <div class="header-limiter">                                    
+                        <h1><a href="#">Balanced Diet</a></h1>
+                         <nav>
+							<a href="#">View Customer</a>
+                            <!-- <a href="/bmicalculate/">BMI Calculator</a> -->
+                            <!-- <a href="/dietChart/">Diet Chart</a> -->
+                            <!-- <a href="/foodpyramid/">Food Pyramid</a> -->
+                            <!-- <a href="/">SERVICES</a> -->
+                            <!-- <a href="/">CONTACT</a> -->
+                            <a href="/logout/">logout</a>
+                            <!-- <a href="/user_webpage_register/">SIGN UP</a> -->
+                        </nav>               
+                    </div>              
+                </header>            
+    </section>
+	<section class="content">
+		<div class="row" id="add_data">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+
+					<!-- <div class="box-header with-border"> -->
+
+						<!-- <p style="font-size:18px;">Customer List -->
+
+						<!-- <button class="btn btn-success pull-right" id="add" onclick="button_click_add()"><i class="fa fa-plus-square-o"></i> Add Customer </button> -->
+
+						<!-- </p> -->
+
+				
+					<!-- <div class="box-body" style="overflow-x: auto;"> -->
+					<div class="box-body" >
+						<table id="student_details" class="table table-bordered table-hover" style="width: 100%;margin-left:90%">
+							<thead>
+								<!-- <tr bgcolor="#a2fdfd"> -->
+								<tr bgcolor="#4a4b46" color="white">
+								<th width="2%"><center>Sr.No</center></th>
+								<th width="10%"><center>Name</center></th>
+								<th width="10%"><center>Address</center></th>
+								<th width="10%"><center>Email ID</center></th>
+								<th width="10%"><center>Mobile No</center></th>
+
+								</tr>
+							</thead>
+							<tbody>
+							{% for i in customer_obj %}
+
+								<tr>
+									<td>
+									{{forloop.counter}}
+									</td>
+									<td>
+										{% if i.name %}
+
+											{{i.name}} 
+
+										{% else %}
+
+											<center>-</center>
+
+										{% endif %}
+
+									</td>
+
+									<td>
+										{% if i.address %}
+
+											{{i.address}} 
+
+										{% else %}
+											<center>-</center>
+										{% endif %}
+									</td>
+									<td width=10>
+										{% if i.mobile_no %}
+
+											{{i.mobile_no}}
+										{% else %}
+											<center>-</center>
+										{% endif %}
+									</td>							
+									<td>
+										{% if i.email %}
+											{{i.email}}
+										{% else %}
+											<center>-</center>	
+									{% endif %}		
+									</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+						</td>
+						</tr>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+    <footer>
+        
+                <div class="col-md-4">
+                        <div class="footer-contact">
+                                <span><img src="{% static 'images/terms.png' %}" style="width:11%"></span>
+                                <p style="font-size:12px">Terms of Used</p>
+                        </div>
+                 </div>
+            </div>
+        </div>
+    </footer>
+        <div class="header-fixed-placeholder"></div>
+       
+<script>
+<!-- function calculate(){ -->
+
+	<!-- $("#button_submit").show(); -->
+
+<!-- } -->
+
+<!-- $(document).ready(function(){ -->
+	<!-- $('#Student_Details').DataTable( { -->
+    <!-- }).columns.adjust() -->
+<!-- }) -->
+$(document).ready(function () {
+  $('#student_details').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+});
+
+function calculate(){
+
+var height = $("#height").val();
+var weight = $("#weight").val();
+	console.log("weight 1.....",weight)
+	console.log("height...2..",height)
+	if (weight == "")
+	{
+	$('#email_error').show()
+	}
+	else if(height == "")
+	{
+	$('#password_error').show()
+	}
+
+	else{
+	$.ajax({
+			method : "POST",
+			url : "/calculate_bmi/",
+			data : {
+				'weight':weight,
+				'height':height,
+			},
+			success : function(response){
+				console.log(response)
+				if (response == "success"){
+					location.href = "/profile/";	
+					}	
+				else{
+					$('#err_message').show()
+					}
+	}
+	});
+	}
+}
+
+$('#username').keyup(function(){
+$('#err_username').hide();
+$('#err_message').hide();
+})
+$("#pass").keyup(function(){
+$('#err_password').hide();
+$('#err_message').hide();
+})
+$(window, document, undefined).ready(function() {
+
+  $('input').blur(function() {
+    var $this = $(this);
+    if ($this.val())
+      $this.addClass('used');
+    else
+      $this.removeClass('used');
+  });
+
+  var $ripples = $('.ripples');
+
+  $ripples.on('click.Ripples', function(e) {
+    var $this = $(this);
+    var $offset = $this.parent().offset();
+    var $circle = $this.find('.ripplesCircle');
+    var x = e.pageX - $offset.left;
+    var y = e.pageY - $offset.top;
+
+    $circle.css({
+      top: y + 'px',
+      left: x + 'px'
+    });
+    $this.addClass('is-active');
+  });
+  $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
+  	$(this).removeClass('is-active');
+  });
+
+});
+
+</script>
+<!-- <script src="{% static 'vendor_login/jquery/jquery-3.2.1.min.js' %}" type="a12d6ce53cbfd5c6184fb870-text/javascript"></script> -->
+<!-- <script src="{% static 'vendor_login/daterangepicker/daterangepicker.js' %}" -->
+<!-- type="a12d6ce53cbfd5c6184fb870-text/javascript"></script> -->
+<!-- <script src="{% static 'js/main.js' %}" type="a12d6ce53cbfd5c6184fb870-text/javascript' %}"></script> -->
+<!-- <script src="{% static 'js/rocket-loader.min.js' %}" -->
+<!-- data-cf-settings="a12d6ce53cbfd5c6184fb870-|49" defer=""></script> -->
+
+</body>
+</html>                                                                                                                                                                                                                                                                                         

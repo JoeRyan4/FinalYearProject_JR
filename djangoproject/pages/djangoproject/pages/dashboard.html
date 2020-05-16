@@ -1,0 +1,457 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Courier Tracking</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/dash.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<style>
+.file{
+  margin-right: 15px;
+    margin-left: 15px;
+}
+.right{
+  text-align: right;
+}
+@media (min-width: 768px){
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+}
+.edit {
+	padding-top: 7px;	
+	padding-right: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
+}
+.edit a {
+	color: #000;
+}
+.profile-pic {
+	position: relative;
+	display: inline-block;
+}
+
+.profile-pic:hover .edit {
+	display: block;
+}
+
+.imagediv {
+	float:left;
+    margin-top:50px;
+}
+.imagediv .showonhover {
+	background:red;
+	padding:20px;
+	opacity:0.9;
+	color:white;
+	width: 100%;
+	display:block;	
+	text-align:center;
+	cursor:pointer;
+}
+</style>
+<body>
+  {% if admin_obj == "yes"%}
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+          <i class="fa fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+          <div class="sidebar-content">
+           <div class="sidebar-brand">
+        <a href="#">Courier Tracking</a>
+        <div id="close-sidebar">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+            <div class="sidebar-header">
+              <div class="user-info">
+                <span class="user-name">Welcome 
+
+                </span>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+              <ul>
+                <li class="sidebar">
+                    <a href="/dashboard/">
+                        <i class="fa fa-plus"></i>
+                        <span>Add Warehouse</span>
+                        </a>
+                </li>
+                <li class="sidebar">
+                        <a href="/view_warehouse/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Manage Warehouse</span>
+                            </a>
+                </li>
+				
+				<!-- <li class="sidebar"> -->
+                    <!-- <a href="/package/"> -->
+                        <!-- <i class="fa fa-plus"></i> -->
+                        <!-- <span>Add Package</span> -->
+                        <!-- </a> -->
+                <!-- </li> -->
+				
+				<li class="sidebar">
+                        <a href="/view_package/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Package Details</span>
+                            </a>
+                </li>
+
+				<!-- <li class="sidebar"> -->
+                    <!-- <a href="/check_in/"> -->
+                        <!-- <i class="fa fa-plus"></i> -->
+                        <!-- <span>Check In Package</span> -->
+                        <!-- </a> -->
+                <!-- </li> -->	
+				<li class="sidebar">
+                        <a href="/check_list/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Check List</span>
+                            </a>
+                </li>
+				
+					 <li class="sidebar">
+                        <a href="/logout/">
+                           <i class="fa fa-power-off"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+					
+                   </ul>
+            </div>
+           </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+          <div class="container-fluid">
+            <h2>Add Warehouse</h2>
+            <hr>
+           <div class="row">
+             <div class="col-md-8 offset-md-2">
+				<form class="form-horizontal">
+				
+				  <div class="row form-group">
+                    <label class="control-label col-sm-3" for="email">Username:</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control"  id= "w_username" placeholder="Enter Username">
+					  <span style="display:none;color:red;"  id="w_username_error">Please Enter  Username</span>
+					   <span style="display:none;color:red;"  id="username_error">username is already  exist</span>
+					  
+                    </div>
+                    </div>	
+					 <div class="row form-group">
+                    <label class="control-label col-sm-3" for="email">Password:</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control"  id= "w_password" placeholder="Enter Password">
+					  <span style="display:none;color:red;"  id="w_password_error">Please Enter  Password</span>					  
+                    </div>
+                    </div>			
+                  <div class="row form-group">
+                    <label class="control-label col-sm-3" for="email"> Warehouse Name :</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control"  id= "name" placeholder="Enter  Warehouse Name">
+					  <span style="display:none;color:red;"  id="name_error">Please Enter Warehouse  Name</span>					  
+                    </div>
+                    </div>					
+					<div class="row form-group">
+                      <label class="control-label col-sm-3" for="email">Address :</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" id="address" placeholder="Enter Address"></textarea>
+						<span style="display:none;color:red;"  id="address_error">Please Enter Address</span>
+                    </div>
+                    </div>
+			                    <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email">City Name :</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="city" placeholder="Enter City Name">
+							<span style="display:none;color:red;"  id="city_error">Please Enter City Name</span>
+                          </div>
+                          </div>                                                    
+							<div class="row form-group">
+                          <label class="control-label col-sm-3" for="email">Pincode :</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="pincode" placeholder="Enter Pincode" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9.+]/g, '').replace(/(\..*)\./g, '$1');">
+							<span style="display:none;color:red;"  id="pincode_error">Please Enter Pincode</span>
+                          </div>
+                          </div>							 
+							  <div class="form-group">
+								<div class="offset-sm-6 col-sm-6" style="margin-top:20px;">
+									<span type="submit" id="save" class="btn btn-primary"  class="btn btn-primary" style="background: green;" onclick="save_data()">Save</span>
+								</div>
+								</div>
+                </form>
+            </div>
+            </div>
+           </main>
+        </div>
+        </div>      
+{%else%}		
+		 <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+          <i class="fa fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+          <div class="sidebar-content">
+           <div class="sidebar-brand">
+        <a href="#">Courier Tracking</a>
+        <div id="close-sidebar">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+            <div class="sidebar-header">
+              <div class="user-info">
+                <span class="user-name">Welcome 
+
+                </span>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+              <ul>
+                <!-- <li class="sidebar"> -->
+                    <!-- <a href="/dashboard/"> -->
+                        <!-- <i class="fa fa-plus"></i> -->
+                        <!-- <span>Add Warehouse</span> -->
+                        <!-- </a> -->
+                <!-- </li> -->              
+				<li class="sidebar">
+                    <a href="/package/">
+                        <i class="fa fa-plus"></i>
+                        <span>Add Package</span>
+                        </a>
+                </li>				
+				<li class="sidebar">
+                        <a href="/view_package/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Manage Package</span>
+                            </a>
+                </li>
+				<li class="sidebar">
+                    <a href="/check_in/">
+                        <i class="fa fa-plus"></i>
+                        <span>Check In Package</span>
+                        </a>
+                </li>				
+				<li class="sidebar">
+                        <a href="/check_list/">
+                            <i class="fa fa-tasks"></i>
+                            <span>Check List</span>
+                            </a>
+                </li>			
+					 <li class="sidebar">
+                        <a href="/logout/">
+                           <i class="fa fa-power-off"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+					
+                   </ul>
+            </div>
+           </div>
+        </nav>
+        <!-- sidebar-wrappers  -->
+        <main class="page-content">
+          <div class="container-fluid">
+            <h2>Add Warehouse</h2>
+            <hr>
+           <div class="row">
+             <div class="col-md-8 offset-md-2">
+				<form class="form-horizontal">
+				
+				  <div class="row form-group">
+                    <label class="control-label col-sm-3" for="email">UserName:</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control"  id= "w_username" placeholder="Enter User Name">
+					  <span style="display:none;color:red;"  id="w_username_error">Please Enter  User Name</span>
+					   <span style="display:none;color:red;"  id="username_error">User Name is already  Exist</span>					  
+                    </div>
+                    </div>					
+					 <div class="row form-group">
+                    <label class="control-label col-sm-3" for="email">Password:</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control"  id= "w_password" placeholder="Enter Password">
+					  <span style="display:none;color:red;"  id="w_password_error">Please Enter  Password</span>					  
+                    </div>
+                    </div>										
+                  <div class="row form-group">
+                    <label class="control-label col-sm-3" for="email"> Warehouse Name :</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control"  id= "name" placeholder="Enter  Warehouse Name">
+					  <span style="display:none;color:red;"  id="name_error">Please Enter Warehouse  Name</span>
+                    </div>
+                    </div>				
+					<div class="row form-group">
+                      <label class="control-label col-sm-3" for="email">Address :</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" id="address" placeholder="Enter Address"></textarea>
+						<span style="display:none;color:red;"  id="address_error">Please Enter Address</span>
+                    </div>
+                    </div>
+                      <div class="row form-group">
+                          <label class="control-label col-sm-3" for="email">City Name :</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="city" placeholder="Enter City Name">
+							<span style="display:none;color:red;"  id="city_error">Please Enter City Name</span>
+                          </div>
+                          </div>                        
+							<div class="row form-group">
+                          <label class="control-label col-sm-3" for="email">Pincode :</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control"  id="pincode" placeholder="Enter Pincode" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9.+]/g, '').replace(/(\..*)\./g, '$1');">
+							<span style="display:none;color:red;"  id="pincode_error">Please Enter Pincode</span>
+                          </div>
+                          </div>							 
+							<div class="form-group">
+								<div class="offset-sm-6 col-sm-6" style="margin-top:20px;">
+									<span type="submit" id="save" class="btn btn-primary"  class="btn btn-primary" style="background: green;" onclick="save_data()">Save</span>
+								</div>
+							</div>
+                </form>
+            </div>
+            </div>
+           </main>
+        </div>
+        </div>
+	{%endif%}
+<script>
+
+jQuery(function ($) {
+$(".sidebar-dropdown > a").click(function() {
+$(".sidebar-submenu").slideUp(200);
+if (
+$(this)
+  .parent()
+  .hasClass("active")
+) {
+$(".sidebar-dropdown").removeClass("active");
+$(this)
+  .parent()
+  .removeClass("active");
+} else {
+$(".sidebar-dropdown").removeClass("active");
+$(this)
+  .next(".sidebar-submenu")
+  .slideDown(200);
+$(this)
+  .parent()
+  .addClass("active");
+}
+});
+$("#close-sidebar").click(function() {
+$(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function() {
+$(".page-wrapper").addClass("toggled");
+});
+});
+</script>
+<script>
+function save_data(){ 
+	var w_username = $("#w_username").val()
+	var w_password = $("#w_password").val()
+	var name = $("#name").val()
+   var address = $("#address").val()
+   var city = $("#city").val()
+   var pincode = $("#pincode").val()
+   var food_type_id = $("#food_type_id").val()
+   var password = $("#password").val()
+   var cnf_password = $("#cnf_password").val()  
+	console.log(w_username)
+	console.log(name)
+	console.log(address)
+	console.log(city)
+	console.log(pincode)	
+	if (w_username == "")
+	{
+	$('#w_username_error').show()
+	}
+	else if (w_password == "")
+	{
+	$('#w_password_error').show()
+	}
+	else if (name == "")
+	{
+	$('#name_error').show()
+	}
+	else if(address == "")
+	{
+	$('#address_error').show()
+	}
+	else if(city == "")
+	{
+	$('#city_error').show()
+	}
+	else if(pincode == "")
+	{
+		$('#pincode_error').show()
+	}
+  	
+	else{
+	$.ajax({
+			method : "POST",
+			url : "/store_warehouse/",
+			data : {
+					'w_username':w_username,
+					'w_password':w_password,
+					'name':name,
+					'address':address,
+					'city':city,
+					'pincode':pincode,
+					
+			},
+			success : function(response){
+				console.log(response)
+				
+			 if(response == "error"){
+						$('#username_error').show();
+				}
+				else if (response == "success")swal({
+				title: "Warehouse Added Successfully",
+				icon: "success",
+				button: "Ok",
+				closeOnClickOutside: false,
+			}).then(function() {
+				location.reload();
+			});	
+			}
+		});
+	}
+}
+
+$("#w_username").keyup(function(){
+	$("#w_username_error").hide();
+	$("#username_error").hide();
+});
+$("#w_password").keyup(function(){
+	$("#w_password_error").hide();
+});
+$("#name").keyup(function(){
+	$("#name_error").hide();
+});
+$("#address").keyup(function(){
+	$("#address_error").hide();
+});
+$("#city").keyup(function(){
+	$("#city_error").hide();
+});
+$("#pincode").keyup(function(){
+	$("#pincode_error").hide();
+});
+</script>  
+</body>
+</html>
